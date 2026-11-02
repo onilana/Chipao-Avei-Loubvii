@@ -335,7 +335,6 @@ fun AboutScreenContent(
         // Section 3.5: App Version & Updates
         item {
             val currentVersionName = remember(context) { AppUpdateManager.getCurrentVersionName(context) }
-            val currentVersionCode = remember(context) { AppUpdateManager.getCurrentVersionCode(context) }
 
             Card(
                 shape = RoundedCornerShape(20.dp),
@@ -360,7 +359,7 @@ fun AboutScreenContent(
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                text = "Version $currentVersionName (Build $currentVersionCode)",
+                                text = "Version $currentVersionName",
                                 style = MaterialTheme.typography.bodyMedium,
                                 fontWeight = FontWeight.SemiBold,
                                 color = MaterialTheme.colorScheme.onSurface

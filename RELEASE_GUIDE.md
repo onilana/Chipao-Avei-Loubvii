@@ -111,16 +111,17 @@ git push origin main
    - The APK downloads directly inside the app with a live progress bar.
    - The user never leaves to an external browser.
 4. **Seamless Update**: Once downloaded, the Android package installer pops up over the app. The user taps **"Update"**, and all personal notes, favorites, and recent history are preserved.
-5. **Auto-Hide**: When the new version opens, it displays `Version 1.3 (Build 4)`, and the download button automatically vanishes.
+5. **Auto-Hide**: When the new version opens, it displays `Version 1.3`, and the download button automatically vanishes.
 
 ---
 
-## Optional: 1-Click Automated PowerShell Script
+## Optional: 1-Click Automated Script
 
 For maximum convenience, you can also run the bundled release script:
 
-```powershell
-.\release_helper.ps1
+```bat
+.\release.bat
 ```
+*(or double-click `release.bat` in File Explorer)*
 
 It prompts you for the new version number, automatically updates both files, compiles the release APK, pushes to GitHub, and opens the GitHub release page ready for upload!

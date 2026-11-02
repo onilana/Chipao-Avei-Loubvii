@@ -21,12 +21,35 @@ data class AppUpdateInfo(
     val isUpdateAvailable: Boolean,
     val currentVersion: String,
     val latestVersion: String,
-    val latestVersionCode: Int,
+    val latestVersionCode: Int = 0,
     val releaseNotes: String,
     val downloadUrl: String
 )
 
 object AppUpdateManager {
+
+    /**
+     * Compares semantic version names (e.g. "1.3" vs "1.2", "1.4" vs "1.3").
+     * Returns true ONLY if [latest] is strictly newer than [current].
+     */
+    fun isVersionNewer(latest: String, current: String): Boolean {
+        val cleanLatest = latest.trim().removePrefix("v").removePrefix("V")
+        val cleanCurrent = current.trim().removePrefix("v").removePrefix("V")
+        if (cleanLatest.isBlank() || cleanCurrent.isBlank()) return false
+        if (cleanLatest.equals(cleanCurrent, ignoreCase = true)) return false
+
+        val latestParts = cleanLatest.split(".").mapNotNull { it.toIntOrNull() }
+        val currentParts = cleanCurrent.split(".").mapNotNull { it.toIntOrNull() }
+
+        val maxLength = maxOf(latestParts.size, currentParts.size)
+        for (i in 0 until maxLength) {
+            val l = latestParts.getOrElse(i) { 0 }
+            val c = currentParts.getOrElse(i) { 0 }
+            if (l > c) return true
+            if (l < c) return false
+        }
+        return false
+    }
 
     fun getCurrentVersionName(context: Context): String {
         return try {
@@ -105,7 +128,7 @@ object AppUpdateManager {
                 val notes = json.optString("releaseNotes", "")
                 val downloadUrl = json.optString("downloadUrl", "")
 
-                val updateAvailable = latestCode > currentCode
+                val updateAvailable = isVersionNewer(latest = latestName, current = currentName)
                 if (updateAvailable) {
                     AppNotificationManager.showUpdateNotification(
                         context = context,

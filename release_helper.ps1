@@ -18,28 +18,26 @@ $currentCodeMatch = [regex]::Match($content, 'versionCode\s*=\s*(\d+)')
 $currentNameMatch = [regex]::Match($content, 'versionName\s*=\s*"([^"]+)"')
 
 $currentCode = if ($currentCodeMatch.Success) { [int]$currentCodeMatch.Groups[1].Value } else { 3 }
-$currentName = if ($currentNameMatch.Success) { $currentNameMatch.Groups[1].Value } else { "1.2" }
+$currentName = if ($currentNameMatch.Success) { $currentNameMatch.Groups[1].Value } else { "1.3" }
 
 Write-Host "Current App Version: " -NoNewline
-Write-Host "v$currentName " -ForegroundColor Yellow -NoNewline
-Write-Host "(Build $currentCode)" -ForegroundColor Yellow
+Write-Host "v$currentName" -ForegroundColor Yellow
 Write-Host ""
 
-# 2. Prompt user for new version
-$suggestedCode = $currentCode + 1
-$inputName = Read-Host "Enter new Version Name [press Enter for v$currentName or type e.g. 1.3]"
+# 2. Prompt user for new version name
+$inputName = Read-Host "Enter new Version Name [press Enter for v$currentName or type e.g. 1.4]"
 $newVersionName = if ([string]::IsNullOrWhiteSpace($inputName)) { $currentName } else { $inputName.TrimStart('v').Trim() }
 
-$inputCode = Read-Host "Enter new Version Code [press Enter for $suggestedCode]"
-$newVersionCode = if ([string]::IsNullOrWhiteSpace($inputCode)) { $suggestedCode } else { [int]$inputCode.Trim() }
+# Automatically increment internal Android versionCode in background
+$newVersionCode = $currentCode + 1
 
-$releaseNotes = Read-Host "Enter Release Notes summary [e.g. Corrected hymn typos and in-app updater]"
+$releaseNotes = Read-Host "Enter Release Notes summary [e.g. Corrected hymn typos]"
 if ([string]::IsNullOrWhiteSpace($releaseNotes)) {
     $releaseNotes = "Hymnal improvements and bug fixes."
 }
 
 Write-Host ""
-Write-Host "Preparing Release: v$newVersionName (Build $newVersionCode)..." -ForegroundColor Green
+Write-Host "Preparing Release: v$newVersionName..." -ForegroundColor Green
 
 # 3. Update app/build.gradle.kts
 $newContent = [regex]::Replace($content, 'versionCode\s*=\s*\d+', "versionCode = $newVersionCode")
@@ -82,7 +80,7 @@ Write-Host "  ✓ Built signed APK successfully! ($apkSizeMB MB)" -ForegroundCol
 Write-Host ""
 Write-Host "Pushing updates to GitHub..." -ForegroundColor Cyan
 git add app/build.gradle.kts version.json
-git commit -m "Release v$newVersionName (Build $newVersionCode)"
+git commit -m "Release v$newVersionName"
 git push origin main
 Write-Host "  ✓ Pushed code to GitHub origin main" -ForegroundColor Green
 
