@@ -1,8 +1,17 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.google.services)
+}
+
+val localProps = Properties().apply {
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.inputStream().use { this.load(it) }
+    }
 }
 
 android {
@@ -13,7 +22,7 @@ android {
         applicationId = "org.pnba"
         minSdk = 24
         targetSdk = 35
-        versionCode = 4
+        versionCode = 5
         versionName = "1.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -21,10 +30,16 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file(project.findProperty("RELEASE_STORE_FILE") as String? ?: "../release-key.jks")
-            storePassword = project.findProperty("RELEASE_STORE_PASSWORD") as String?
-            keyAlias = project.findProperty("RELEASE_KEY_ALIAS") as String?
-            keyPassword = project.findProperty("RELEASE_KEY_PASSWORD") as String?
+            val storeFilePath = localProps.getProperty("RELEASE_STORE_FILE")
+                ?: (project.findProperty("RELEASE_STORE_FILE") as String?)
+                ?: "../release-key.jks"
+            storeFile = file(storeFilePath)
+            storePassword = localProps.getProperty("RELEASE_STORE_PASSWORD")
+                ?: (project.findProperty("RELEASE_STORE_PASSWORD") as String?)
+            keyAlias = localProps.getProperty("RELEASE_KEY_ALIAS")
+                ?: (project.findProperty("RELEASE_KEY_ALIAS") as String?)
+            keyPassword = localProps.getProperty("RELEASE_KEY_PASSWORD")
+                ?: (project.findProperty("RELEASE_KEY_PASSWORD") as String?)
         }
     }
 
