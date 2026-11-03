@@ -61606,9 +61606,1459 @@
   },
   {
     "id": 500,
-    "title": "HALLELUYAH CHORUS",
+    "title": "JIHOVAH BASHA",
+    "englishTitle": "Behold God's Creation Telling",
+    "firstLine": "Zhukhaio, Jihovah basha khenou paowe",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is G",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Zhukhaio, Jihovah basha khenou paowe,",
+          "Soupeiyu Mapao kho-a bue ngali sou",
+          "Duki nou ve ngaolaisa teidei ashee nasu,",
+          "Na veishi ashee dakhailai."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Zhukhaio, Jihovah basha khenou paowe,",
+          "Kho-a bue Jihovah maiye popa loure;",
+          "Jihovah nou deiphao hai soushee louyu thaisu,",
+          "Asawo ne buh daikilai?"
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Zhukhaio, Jihovah basha khenou paowe,",
+          "Teideiphao hai larü kaoli büa zhao bailai;",
+          "Jihovah nou deiphao hai soushee louyu thaisu,",
+          "Ne buh kaolu lousu homoe?"
+        ]
+      }
+    ],
+    "chorus": [
+      "He, deiphao vamai kaishu lourao",
+      "Maiyu buh thaowu rao;",
+      "Tave loulo ava buh hisu,",
+      "Puh bahsha khenou pao-a bue."
+    ],
+    "keynotePitchHz": 392.0,
+    "keynoteName": "G",
+    "tune": "Behold God's Creation Telling",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 501,
+    "title": "MAPAO E NEVEI BAIE",
+    "englishTitle": "Lord, I Am Thine",
+    "firstLine": "E teithe tsü",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is G",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "E teithe tsü",
+          "Mapao wo thaifü talai,",
+          "Mapaowo E Nevei baie,",
+          "Lududo nou",
+          "E kao-a duta yuma,",
+          "Mapaowo E Nevei bai."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Mainou E ye",
+          "saba-a malaiyuma,",
+          "Mapaowo E nevei bai,",
+          "Asamai nou",
+          "Eye thao-a tayuma,",
+          "Mapaowo E nevei baie."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "E deipahova",
+          "taraki tave yuma,",
+          "Mapaowo E nevei bai;",
+          "E thai-a hri-a",
+          "taraki veyuma,",
+          "Mapaowo E nevei bai."
+        ]
+      }
+    ],
+    "chorus": [
+      "Teikhai teirü shi vea E Jisu veie,",
+      "Teishi teile vei vea E Jisu veie;",
+      "Thaine-a E nevei souvu zülai,",
+      "Mapaowo E Nevei bai."
+    ],
+    "keynotePitchHz": 392.0,
+    "keynoteName": "G",
+    "tune": "Lord, I Am Thine",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 502,
+    "title": "NASHEE LOUYU THAISU",
+    "englishTitle": "Great Change Since I Was Born",
+    "firstLine": "Raiki souyu vah soupulai more",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is G",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Raiki souyu vah soupulai more,",
+          "Raiki souyu vah soupulai more,",
+          "Raiki souyu vah soupulai more,",
+          "Nashee louthai Ahrü kure."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Raiki souyu lou soupulai more,",
+          "Raiki souyu lou soupulai more,",
+          "Raiki souyu lou soupulai more,",
+          "Nashee louthai Ahrü kure."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Raiki paoyu chi paopulai more,",
+          "Raiki paoyu chi paopulai more,",
+          "Raiki paoyu chi paopulai more,",
+          "Nashee louthai Ahrü kure."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Raiki tayu zhai tapulai more,",
+          "Raiki tayu zhai tapulai more,",
+          "Raiki tayu zhai tapulai more,",
+          "Nashee louthai Ahrü kure."
+        ]
+      },
+      {
+        "verseNumber": 5,
+        "lines": [
+          "Raiki veyu buh vepulai more,",
+          "Raiki veyu buh vepulai more,",
+          "Raiki veyu buh vepulai more,",
+          "Nashee louthai Ahrü kure."
+        ]
+      },
+      {
+        "verseNumber": 6,
+        "lines": [
+          "Raiki jüpana jüpalai more,",
+          "Raiki jüpana jüpalai more,",
+          "Raiki jüpana jüpalai more,",
+          "Nashee louthai Ahrü kure."
+        ]
+      },
+      {
+        "verseNumber": 7,
+        "lines": [
+          "Mapao Jisu Khrista dakhai velai,",
+          "Mapao Jisu Khrista dakhai velai,",
+          "Mapao Jisu Khrista dakhai velai,",
+          "Südonou ne souda lourao."
+        ]
+      }
+    ],
+    "chorus": [
+      "Nashee louyu thaisu",
+      "Nashee louyu thaisu",
+      "Nashee louyu thaisu",
+      "Paosha louho sayu ngaolou-e."
+    ],
+    "keynotePitchHz": 392.0,
+    "keynoteName": "G",
+    "tune": "Great Change Since I Was Born",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 503,
+    "title": "REVIVAL SEIVEPEIO",
+    "englishTitle": "Send A Great Revival",
+    "firstLine": "Ahi vepeio he! Jihovah",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is F",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Ahi vepeio he! Jihovah,",
+          "dao raichoki büa;",
+          "Seipeio revival deiphaova,",
+          "süsü kho-a bue."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Meibuh loure rai pheipapeio,",
+          "hashi hulai peio;",
+          "Nevei khouko sü nou loupeio,",
+          "Avei chemo hie."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Rashi bah hinou vupapeio,",
+          "Amahmo khaipeio;",
+          "Ahi cheche le pothou peio,",
+          "poa Neye tholai."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Ngaoba reih duyu soukhapeio,",
+          "deiphao jü veilai;",
+          "Dourou meiche-a buyu hai,",
+          "pove jülou lai."
+        ]
+      }
+    ],
+    "chorus": [
+      "Mapao revival seivepeio,",
+      "Revival seivepeio,",
+      "revival seivepeio;",
+      "Mapao revival seivepeio,",
+      "Ava nou soushee peilo."
+    ],
+    "keynotePitchHz": 349.23,
+    "keynoteName": "F",
+    "tune": "Send A Great Revival",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 504,
+    "title": "SHEEYU NUH",
+    "englishTitle": "City Of Holiness",
+    "firstLine": "Sana nou souyu",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is G",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Sana nou souyu",
+          "mashee nuh ali bue,",
+          "Khailulou mai thethe",
+          "lousoue;",
+          "Mapao Jihovah ye",
+          "lou sousho-a buwe,",
+          "Mapaowo vebuh hinou."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Veayu deiphao haihi",
+          "E sü veivewe,",
+          "Sütou yuma asasa bue,",
+          "Rei tachopa E nou",
+          "Jisu ye ngaoloulai,",
+          "Sühi nou E asolai."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Hashi nou Eye sü",
+          "hao-a buyuma,",
+          "Jisu nou E salai peilai;",
+          "Deiphao reih buh haina",
+          "hai tacho palouzü,",
+          "Hriyu peirü rüpeilai."
+        ]
+      }
+    ],
+    "chorus": [
+      "Oh! daizhozhou khupasa,",
+      "Sühi veayu alia hae",
+      "Oh! nuh avei sühisu,",
+      "E-a ve hrünüe;",
+      "Mapao kikhu houpeio,",
+      "E sühi ve hrülai."
+    ],
+    "keynotePitchHz": 392.0,
+    "keynoteName": "G",
+    "tune": "City Of Holiness",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 505,
+    "title": "MAPAO DAORE DONOU SOUDALO",
+    "englishTitle": "Prepare To Meet Thy God",
+    "firstLine": "Ne Mapaoye sü ve",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is Eb",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Ne Mapaoye sü ve",
+          "daoloure donou, (3 times)"
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Jisu hai ludu, cheche,",
+          "hriyu nasüe. (3 times)",
+          "• Khoras",
+          "Ne zhou Puh pai chou louzü;",
+          "Nele khouwoso} (3 times)",
+          "Ne Puh pai chou louzü;",
+          "nele khouwoso."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Neletao Rako Mashi",
+          "ngaolou homoe? (3 times)"
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Neletao rashi hinou",
+          "tarei talo. (3 times)",
+          "• Khoras",
+          "Ne zhou Puh pai chou louzü;",
+          "Nele khouwoso} (3 times)",
+          "Ne Puh pai chou louzü;",
+          "nele khouwoso."
+        ]
+      },
+      {
+        "verseNumber": 5,
+        "lines": [
+          "Rako Mashi hinou",
+          "mana asheelo. (3 times)",
+          "• Khoras",
+          "Ne zhou Puh pai chou louzü;",
+          "Nele khouwoso} (3 times)",
+          "Ne Puh pai chou louzü;",
+          "nele khouwoso."
+        ]
+      },
+      {
+        "verseNumber": 6,
+        "lines": [
+          "Jisu dakhai velai, ne",
+          "souda homoe? (3 times)",
+          "• Khoras",
+          "Ne zhou Puh pai chou louzü;",
+          "Nele khouwoso} (3 times)",
+          "Ne Puh pai chou louzü;",
+          "nele khouwoso."
+        ]
+      },
+      {
+        "verseNumber": 7,
+        "lines": [
+          "Jerusalem asheehi",
+          "vere donou. (3 times)",
+          "• Khoras",
+          "Ne zhou Puh pai chou louzü;",
+          "Nele khouwoso} (3 times)",
+          "Ne Puh pai chou louzü;",
+          "nele khouwoso."
+        ]
+      }
+    ],
+    "chorus": [
+      "Ne zhou Puh pai chou louzü;",
+      "Nele khouwoso (3 times)",
+      "Ne Puh pai chou louzü;",
+      "nele khouwoso."
+    ],
+    "keynotePitchHz": 311.13,
+    "keynoteName": "Eb",
+    "tune": "Prepare To Meet Thy God",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 506,
+    "title": "VULI E AZHI HI BUE",
+    "englishTitle": "I Was Once In Darkness",
+    "firstLine": "Teile lihi E mah soubue",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is G",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Teile lihi E mah soubue,",
+          "Chuo E Mapaoye",
+          "sü ngaoloue;",
+          "Deiphao mah buh",
+          "hisü bupu laimoe,",
+          "Athao tyali vedao-a bue;",
+          "Mapao chuo E velou-a bue,",
+          "Khaipeiyu Kalvari",
+          "hinou ngaoloue."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Deiphao hrü hai lecho-a bue,",
+          "Kaonayu hai, hayu laire;",
+          "Jisu hi chu thasho tave loulo,",
+          "Nevei süyu mah kou hrülai,",
+          "Mapao nou southeapei laitea,",
+          "Nenou khailu peiyu sü",
+          "ngaoloulai."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Veishoyu teile bubuki,",
+          "Veo Mapao vah sü soulaikhe;",
+          "Nako louzü teile nayu shulai,",
+          "Leliyu phasü ngaolou moa,",
+          "Athaihi dulouyu shulai, He!",
+          "Asa ne thasho tave loupeio."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Mapao chu E tave loure,",
+          "Kaonayu hrüsü E ngao nüe;",
+          "Nenou thaopeiyu soumoa",
+          "E popeio,",
+          "Velouyu mai hrülaiye sü;",
+          "Hulai laimoe touyu nasü, He!",
+          "Mapao Nenou E-a popeiwo."
+        ]
+      }
+    ],
+    "chorus": [
+      "Khaipei-o he! Mapao",
+      "Mapao Nevei soure donou vewe;",
+      "Soukhai touyu mah hrülai,",
+      "Mapao hi peiwe Ahrühai."
+    ],
+    "keynotePitchHz": 392.0,
+    "keynoteName": "G",
+    "tune": "I Was Once In Darkness",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 507,
+    "title": "PUH NOU EYE SOUVEIPEIE",
+    "englishTitle": "He Healed Me",
+    "firstLine": "Puh nou Eye souvei peie",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is G",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Puh nou Eye souvei peie",
+          "(3 times) Jisuno. (repeat)"
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Puh nou Amah khailupeie",
+          "(3 times) kros hinou."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "E Puh ye lülou tea nou",
+          "(3 times) E kuwe."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Puh teithe li khaivelai",
+          "(3 times)  Raki nou."
+        ]
+      },
+      {
+        "verseNumber": 5,
+        "lines": [
+          "Südonou ne soudalo",
+          "(3 times) Chu hinou."
+        ]
+      },
+      {
+        "verseNumber": 6,
+        "lines": [
+          "Alinou ali leshi",
+          "(3 times) Koa hrülai"
+        ]
+      },
+      {
+        "verseNumber": 7,
+        "lines": [
+          "Bah tao-a lousou zholai",
+          "(3 times) Rakinou."
+        ]
+      },
+      {
+        "verseNumber": 8,
+        "lines": [
+          "Hallelujah sou hrülai,",
+          "(3 times) Raki nou."
+        ]
+      }
+    ],
+    "chorus": null,
+    "keynotePitchHz": 392.0,
+    "keynoteName": "G",
+    "tune": "He Healed Me",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 508,
+    "title": "JISU THA VELAIRE",
+    "englishTitle": "Jesus Is Coming Soon",
+    "firstLine": "Deiphaomai tsüle hi",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is Db",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Deiphaomai tsüle hi,",
+          "piyu nou phoupfü bue,",
+          "Phukhai touyu hinou",
+          "pheipa peilai;",
+          "Veayu khailu peilai,",
+          "ne Jihovah tholo,",
+          "Khristamai tashulo,",
+          "cheche phoulo."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Leshiyu khaitalai,",
+          "sashoyu hatalai,",
+          "Paochi zümoyu",
+          "hashi nou phoulai;",
+          "Khupa tyali ngaolai,",
+          "khai teithe sü ngheire,",
+          "Teile sü tha velai,",
+          "shabe houlai."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Veayu sounou halai,",
+          "teisa vayu ngaolai,",
+          "Reipe hi veyuki",
+          "veayu thaolai;",
+          "E tashu lou-a nou",
+          "akhai chi paoyu ki,",
+          "Ki hilo zhao khelai",
+          "sayu ngaolai."
+        ]
+      }
+    ],
+    "chorus": [
+      "Jisu tha velaire,",
+      "shona ho khei laisa,",
+      "Maikhemai nou choulai shabe houyu;",
+      "Thaiyu mai hrishulai,",
+      "Cheche mai zhao talai,",
+      "Sounou hayu rakisü khetalai."
+    ],
+    "keynotePitchHz": 277.18,
+    "keynoteName": "Db",
+    "tune": "Jesus Is Coming Soon",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 509,
+    "title": "JISU NOU MAHMAI KUE",
+    "englishTitle": "Jesus Invites The Sinners",
+    "firstLine": "Jisu kue mah khaipeire donou",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is Eb",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Jisu kue mah khaipeire donou,",
+          "Saitan vei kilai soupulaiwu?",
+          "Leshishoa kuwe taveloulo."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Jisu nou kuveyu phakisü,",
+          "Ne ve loulouzü",
+          "daizho salai;",
+          "Sana nuh hi ve",
+          "hrünü mowu?"
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Kikhu houyu phaki",
+          "veloupeio,",
+          "Chuve loumoyu",
+          "maihrü laisü;",
+          "Dakhai kikhu hai",
+          "houpei laimoe."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Veishoyu raki teidei hisü,",
+          "Siraphim hai",
+          "rakiva mainou;",
+          "Mapao nghoujü",
+          "nou lou sousho bue."
+        ]
+      }
+    ],
+    "chorus": [
+      "Le lilouyu mai Jisu nou leshie,",
+      "Chunou lelilo, teile hare;",
+      "Jisu nou paoyu sü vetedo."
+    ],
+    "keynotePitchHz": 311.13,
+    "keynoteName": "Eb",
+    "tune": "Jesus Invites The Sinners",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 510,
+    "title": "JISU ZHIH HINOU VEILOURE",
+    "englishTitle": "Victory In Jesus",
+    "firstLine": "E nou ko aveili süe",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is Ab",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "E nou ko aveili süe,",
+          "Mapao Jisu nou veilouyu,",
+          "Adonou Puh sü Kalvari",
+          "hinou ve thaipeire;",
+          "Mahmo khailupeire zhe,",
+          "Kalvari hinou küpapeie,",
+          "Zhe süna vanou Amahmo",
+          "khailou-a veiloure."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Sounou mai-a veiloure,",
+          "mahmo maiye",
+          "sü khailupeie,",
+          "Phiba shimai-a taloure,",
+          "nghicha mai-a ngaoloue;",
+          "E vuli ara sounou, Mapao",
+          "Jisu hi veachi paoe,",
+          "Mapao nou keipeiyu vanou,",
+          "Amahmo khailoure."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "E donou buh vei ali,",
+          "Mapao nou souda",
+          "khaitou she,",
+          "Zaidu thailo ludu nasü,",
+          "sana nou soukhai she;",
+          "Sühi Rakivamai nou khailu",
+          "peiyu lou sou bushe,",
+          "E-a teithe li khe sühi nou",
+          "lou sou-a bulai."
+        ]
+      }
+    ],
+    "chorus": [
+      "Mapao Jisu zhih hinou,",
+      "E teisa veiloure,",
+      "Puh zhe sünou Eye phouloue;",
+      "Alia E hrüloure,",
+      "Puh E leshi pei vanou;",
+      "Ahrühai Puh vei soure,",
+      "E panou veiloure."
+    ],
+    "keynotePitchHz": 415.3,
+    "keynoteName": "Ab",
+    "tune": "Victory In Jesus",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 511,
+    "title": "SHULO ARAKO",
+    "englishTitle": "The Call For Rapture",
+    "firstLine": "Tashulo Arako",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is F",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Tashulo Arako,",
+          "tashulo mahmai ne,",
+          "Nenou zhi-abu Mapao sü;",
+          "Teikhai nou sapo-a,",
+          "teihao nou züpo-a,",
+          "Vekoure ne tashu",
+          "sülourao"
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Leshi-o leshipai,",
+          "zhukhaiwo keikhaiwo,",
+          "Nghouda khailai",
+          "moyu bekho;",
+          "Nghoulaire, nghoupare;",
+          "keiloumai rako veie,",
+          "Arako tashu Puhye sülo."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Asawo, Asapai,",
+          "nezü sü thaowuwo,",
+          "Kaishulo, tashu soudalo,",
+          "Souda nümolouzü,",
+          "leda nümolouzü,",
+          "Thaikhai nou",
+          "ngailere paokhaiso."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Mahpfü-a zhao loushie,",
+          "masou-a taloushie,",
+          "Souda vuzülai, zhaoloure;",
+          "Sheetou-a ve daolai,",
+          "Sheeshoyu Mapaoye,",
+          "Souloushie,",
+          "Arako soudalo."
+        ]
+      }
+    ],
+    "chorus": [
+      "Arako tashulo,",
+      "Arako kaishulo,",
+      "Ne zhi-anou bulai hiwu?",
+      "Soulou shie Arako, soulou hoe mahmai ne,",
+      "Zhou ne tashu Mapao sülourao."
+    ],
+    "keynotePitchHz": 349.23,
+    "keynoteName": "F",
+    "tune": "The Call For Rapture",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 512,
+    "title": "NE NASHU AHAI KHOLO",
+    "englishTitle": "Ye Must Be Born Again",
+    "firstLine": "Nai teitheli kheiko phahi",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is G",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Nai teitheli kheiko phahi",
+          "Nikodimas Jisu hi ve;",
+          "Jisunou puh hisü paopeie",
+          "“Ne nashee ahai kholo”"
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Khaiteithe teilesü vere,",
+          "Nehrü teingheisü loutalai;",
+          "Leshi samai louche lourao",
+          "Maiyu vemo jünou."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Asakhemai chukoute ne",
+          "Mah hinou leipoa bulouzü,",
+          "Pokhei khaiso,",
+          "paopa sükhaio,",
+          "Mapao Jisu nghoujü."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Pfüphao hinou nazü",
+          "pfüphaoe,",
+          "Rako hinou nazü rakoe;",
+          "Teisa hamo hrire donou Ne",
+          "nashee hai kholo."
+        ]
+      },
+      {
+        "verseNumber": 5,
+        "lines": [
+          "Asakhemai ne chu koute,",
+          "Nashee loumo-a bulouzü;",
+          "Veayu hoyu veyu phaki",
+          "Ne nasheepu louhoe."
+        ]
+      }
+    ],
+    "chorus": [
+      "Ne nashee ahai kholo",
+      "Raki teidei venülouzü nashee kulo;",
+      "Ne nashee ahai kholo",
+      "Raki teidei ngaore donou nashee kulo."
+    ],
+    "keynotePitchHz": 392.0,
+    "keynoteName": "G",
+    "tune": "Ye Must Be Born Again",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 513,
+    "title": "AVEI AHRU HISUNOU",
+    "englishTitle": "In My Life",
+    "firstLine": "Puh zhuhai sheetou-a nou",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is Ab",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Puh zhuhai sheetou-a nou,",
+          "Leshi shoyu zhusünou,",
+          "(2 times)",
+          "Eye tave saloulai,",
+          "Deiphao mah buh hisünou."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Puh kohai choulou-a nou,",
+          "Avei rako sashowe;",
+          "(2 times)",
+          "Puh nou Avei ahri süe,",
+          "Avei tatou hrülaihi."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Puh nou veyu phakihi,",
+          "Enou Puhye ve sülai;",
+          "(2 times)",
+          "Asasa-a nou daolai,",
+          "Khailu peiyu Mapaosü."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Mapao Jisu leshilo",
+          "Puhnou paoyu khe zülo;",
+          "(2 times)",
+          "Puhnou neye veishoyu,",
+          "Raki hi save peilai."
+        ]
+      }
+    ],
+    "chorus": [
+      "Avei Ahru hisünou,",
+      "Jisuye vedao pulai,",
+      "Puhnou dakhai velouzü,",
+      "Puhye vedao vuzülai",
+      "Avei Ahru hisü nou."
+    ],
+    "keynotePitchHz": 415.3,
+    "keynoteName": "Ab",
+    "tune": "In My Life",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 514,
+    "title": "AVEI TEIDEI SU RAKI MOWU?",
+    "englishTitle": "Is Heaven Not My Home?",
+    "firstLine": "Avei teidei sü raki mowu ?",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is F",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Avei teidei sü raki mowu ?",
+          "(3 times)",
+          "E talai,",
+          "Avei teidei sü raki mowu",
+          "Avei teidei sü raki mowu",
+          "Buhsühi, buh sühi Etalai."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Kainaan teidei",
+          "veishoyu buh hi. (3 times)",
+          "E talai,",
+          "Kainaan teidei",
+          "veishoyu buh hi.",
+          "Kainaan teidei",
+          "veishoyu buh hi.",
+          "Buhsühi, buh sühi Etalai."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Samaitaore netanü mowu?",
+          "( 3 times)",
+          "E talai,",
+          "Samaitaore netanü mowu?",
+          "Samaitaore netanü mowu?",
+          "Buhsühi, buh sühi Etalai."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Teinghei loulai",
+          "moyu buh hisü. ( 3 times)",
+          "E talai,",
+          "Teinghei loulai moyu buh hisü.",
+          "Teinghei loulai moyu buh hisü.",
+          "Buhsühi, buh sühi Etalai."
+        ]
+      },
+      {
+        "verseNumber": 5,
+        "lines": [
+          "Veayu sounou",
+          "soumoyu buh hi ( 3 times)",
+          "E talai,",
+          "Veayu sounou",
+          "soumoyu buh hi",
+          "Veayu sounou",
+          "soumoyu buh hi",
+          "Buhsühi, buh sühi Etalai."
+        ]
+      },
+      {
+        "verseNumber": 6,
+        "lines": [
+          "Veisho nou payu",
+          "poupah buh hi ( 3 times)",
+          "E talai,",
+          "Veisho nou payu",
+          "poupah buh hi",
+          "Veisho nou payu",
+          "poupah buh hi",
+          "Buhsühi, buh sühi Etalai."
+        ]
+      },
+      {
+        "verseNumber": 7,
+        "lines": [
+          "Halleluyah Oh, Halleluyah.",
+          "( 3 times)",
+          "E talai,",
+          "Halleluyah Oh, Halleluyah.",
+          "Halleluyah Oh, Halleluyah.",
+          "Buhsühi, buh sühi Etalai."
+        ]
+      }
+    ],
+    "chorus": null,
+    "keynotePitchHz": 349.23,
+    "keynoteName": "F",
+    "tune": "Is Heaven Not My Home?",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 515,
+    "title": "KALVARI HOSPITAL",
+    "englishTitle": "Calvary Hospital",
+    "firstLine": "Deiphao maiye donou louzii",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is F",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Deiphao maiye donou louzii,",
+          "Sou veilaiyu mai donou louzii;",
+          "Sounou sou-a bumai louzii,",
+          "Deiphao pou-apeimai hi tawe."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Poupei mainou",
+          "souvei louhoe,",
+          "Rako hilonou sou-a bumai;",
+          "Jisu nou souvei peilai tea,",
+          "Leshi sho-a neye khobue."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Eden hinou souyu mahsii,",
+          "Dziinou khiishee peilou hore;",
+          "thou sana nou souvei louhoe,",
+          "Jisu zhe likheibai deinou."
+        ]
+      }
+    ],
+    "chorus": [
+      "Rako hilonou sou",
+      "Kalvari Hospital hi",
+      "Kalvari Hospital molouzü",
+      "Veiloure buh kukhe-a bumai,",
+      "Talaikhe lia hae."
+    ],
+    "keynotePitchHz": 349.23,
+    "keynoteName": "F",
+    "tune": "Calvary Hospital",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 516,
+    "title": "KHAIVE ZHIO",
+    "englishTitle": "Kum Ba Yah",
+    "firstLine": "Khaive zhio Mapao",
+    "timeSignature": "3/4",
+    "keySignature": "Doh is D",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Khaive zhio Mapao,",
+          "khaive zhio (3 times)",
+          "Mapao wo khaive zhio."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Kamai kra-a bue,",
+          "khaive zhio. (3 times)",
+          "Mapao wo khaive zhio."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Kamai lousou bue,",
+          "khaive zhio. (3 times)",
+          "Mapao wo khaive zhio."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Kamai veachi paoe,",
+          "khaive zhio. (3 times)",
+          "Mapao wo khaive zhio."
+        ]
+      },
+      {
+        "verseNumber": 5,
+        "lines": [
+          "Kum Ba Yah Mapao,",
+          "Kum Ba Yah. (3 times)",
+          "Mapao wo khaive zhio."
+        ]
+      }
+    ],
+    "chorus": null,
+    "keynotePitchHz": 293.66,
+    "keynoteName": "D",
+    "tune": "Kum Ba Yah",
+    "meter": "3/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 517,
+    "title": "TAKHAIRE, TAKHAIRE",
+    "englishTitle": "Rolled Away",
+    "firstLine": "Takahire, takhaire, takhaire",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is Bb",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Takahire, takhaire, takhaire,",
+          "Amahmo teiteisii takahi chere;",
+          "Amahmo teitei sii,",
+          "Jisu zhe nou khiipeie,",
+          "Hallelujah takhaire,",
+          "takahire, takhaire;",
+          "Amahmo teitei sii",
+          "takhaichere."
+        ]
+      }
+    ],
+    "chorus": null,
+    "keynotePitchHz": 466.16,
+    "keynoteName": "Bb",
+    "tune": "Rolled Away",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 518,
+    "title": "REVIVAL SEIVEPEIO (II)",
+    "englishTitle": "Send A Great Revival (II)",
+    "firstLine": "Ahi vepeio he! Jihovah",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is F",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Ahi vepeio he! Jihovah,",
+          "dao raichoki büa;",
+          "Seipeio revival deiphaova,",
+          "süsü kho-a bue."
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Meibuh loure rai pheipapeio,",
+          "hashi hulai peio;",
+          "Nevei khouko sü nou loupeio,",
+          "Avei chemo hie."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Rashi bah hinou vupapeio,",
+          "Amahmo khaipeio;",
+          "Ahi cheche le pothou peio,",
+          "poa Neye tholai."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Ngaoba reih duyu",
+          "soukhapeio,",
+          "deiphao jü veilai;",
+          "Dourou meiche-a buyu hai,",
+          "pove jülou lai."
+        ]
+      }
+    ],
+    "chorus": [
+      "Mapao revival seivepeio,",
+      "Revival seivepeio,",
+      "revival seivepeio;",
+      "Mapao revival seivepeio,",
+      "Ava nou soushee peilo."
+    ],
+    "keynotePitchHz": 349.23,
+    "keynoteName": "F",
+    "tune": "Send A Great Revival (II)",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 519,
+    "title": "E NOU LESHIYU TEIDEI",
+    "englishTitle": "The Land I Love",
+    "firstLine": "Daorainou Ramainou",
+    "timeSignature": "4/4",
+    "keySignature": "Doh is A",
+    "hymnBookRef": "",
+    "author": "",
+    "composer": "",
+    "scripture": "",
+    "category": "Revival, Choruses & Social",
+    "verses": [
+      {
+        "verseNumber": 1,
+        "lines": [
+          "Daorainou Ramainou",
+          "soupeiyu Ateidei,",
+          "Teidei haina kohai Enou",
+          "kusha lou hoe;",
+          "Teikhai ne taho teidei",
+          "haina ko doupeio,",
+          "Leshishoe, ngailouhoe,",
+          "eh Poumai teideihai"
+        ]
+      },
+      {
+        "verseNumber": 2,
+        "lines": [
+          "Deichinou zhikhai moa",
+          "teidei haina khoa bue,",
+          "Dzünghounou thekhai moa",
+          "Poumainah ki-a bue;",
+          "Teikhainou sokhaimoa",
+          "putao le sousabue,",
+          "Teinghei-a lounümoa",
+          "puh kihi loutare."
+        ]
+      },
+      {
+        "verseNumber": 3,
+        "lines": [
+          "Poumai kipei hinou",
+          "küpayu vourei rei,",
+          "Mail thethe kücho-a",
+          "mai thethe vai-a bue;",
+          "Vourei nehi mainou",
+          "neki nouyu phaki,",
+          "Akihai Poumai teideihi",
+          "bue tea paopeio."
+        ]
+      },
+      {
+        "verseNumber": 4,
+        "lines": [
+          "Daorai paipao maiwo",
+          "peide-peiva hrübue,",
+          "Ana zhou etao Khrista",
+          "donou reih zülai;",
+          "Holo hailo hrü-a buyu",
+          "Poumai hrülai,",
+          "Sokhaiso, tavelo,",
+          "leroli soulaikhe."
+        ]
+      }
+    ],
+    "chorus": [
+      "Deiphaohi Enou tasühao-a zhuphaki,",
+      "Eh Poumai teidei haina bü-a ngaomohie;",
+      "Reiko vaosüü, ngaire, kheko vourei kübue,",
+      "Poupahnou sühao bue, Poumai teidei hisu."
+    ],
+    "keynotePitchHz": 440.0,
+    "keynoteName": "A",
+    "tune": "The Land I Love",
+    "meter": "4/4",
+    "year": "",
+    "categories": [
+      "Revival, Choruses & Social"
+    ]
+  },
+  {
+    "id": 520,
+    "title": "HALLELUJAH CHORUS",
     "englishTitle": "Hallelujah Chorus",
-    "firstLine": "Hallelujah, Hallelujah, Hallelujah",
+    "firstLine": "Hallelujah, Hallelujah",
     "timeSignature": "4/4",
     "keySignature": "Doh is D",
     "hymnBookRef": "",
@@ -61620,29 +63070,55 @@
       {
         "verseNumber": 1,
         "lines": [
-          "Hallelujah, Hallelujah, Hallelujah, Hallelujah, Hallelujah!",
-          "Hallelujah, Hallelujah, Hallelujah, Hallelujah, Hallelujah!",
-          "For the Lord God Omnipotent reigneth,",
-          "Hallelujah, Hallelujah, Hallelujah, Hallelujah!",
-          "For the Lord God Omnipotent reigneth,",
-          "Hallelujah, Hallelujah, Hallelujah, Hallelujah!",
-          "For the Lord God Omnipotent reigneth,",
-          "Hallelujah, Hallelujah, Hallelujah, Hallelujah, Hallelujah, Hallelujah!",
-          "The kingdom of this world is become",
-          "The Kingdom of our Lord and of His Christ,",
-          "And He shall reign for ever and ever,",
-          "And He shall reign for ever and ever,",
-          "King of kings! (for ever and ever, Hallelujah, Hallelujah!)",
-          "And Lord of lords! (for ever and ever, Hallelujah, Hallelujah!)",
-          "King of kings! (for ever and ever, Hallelujah, Hallelujah!)",
-          "And Lord of lords! (for ever and ever, Hallelujah, Hallelujah!)",
-          "King of kings and Lord of lords!",
-          "And He shall reign for ever and ever,",
-          "King of kings! and Lord of lords!",
-          "And He shall reign for ever and ever,",
-          "For ever and ever, for ever and ever,",
-          "King of kings! and Lord of lords!",
-          "Hallelujah, Hallelujah, Hallelujah, Hallelujah, Hallelujah!"
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah",
+          "Mapao nou tei sa",
+          "khai ha yu Veo siie,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah.",
+          "Mapao nou tei sa",
+          "khai ha yu Veo siie,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah.",
+          "Mapao nou tei sa",
+          "khai ha yu Veo siie,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah",
+          "Deiphao ve teidei siie,",
+          "Puh vei baie,",
+          "Mapao vewo vei baie,",
+          "Khrista vei baie,",
+          "Khrista vei baie,",
+          "Puh ve buh hai",
+          "teisa bukou te lai,",
+          "Vemai pei hi nou veo siie,",
+          "Mapao mai pei nou Mapao,",
+          "Vemai  pei hi nou veo siie.",
+          "Teisa ve lai, Teisa ve lai",
+          "Puh ve buh hai",
+          "Teisa buh kou te lai",
+          "Teisa nou veo sou lai",
+          "Hallelujah, Hallelujah",
+          "Puh ve buh hai teisa nou,",
+          "Teisa nou bu bai lai,",
+          "Vemai pei hi nou veo siie,",
+          "Mapao mai peinou",
+          "Mapao,",
+          "Puh ve buh hai tei sa",
+          "nou bu bai lai,",
+          "Vemai pei hi nou veo sii,",
+          "Hallelujah, Hallelujah,",
+          "Hallelujah, Hallelujah",
+          "Hallelujah."
         ]
       }
     ],

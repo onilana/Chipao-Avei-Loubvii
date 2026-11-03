@@ -132,7 +132,7 @@ fun IndexScreen(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(imageVector = Icons.Default.GridView, contentDescription = null, modifier = Modifier.size(16.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text("Grid (1-500)")
+                            Text("Grid (1-520)")
                         }
                     },
                     modifier = Modifier.testTag("tab_grid_index")
@@ -240,7 +240,8 @@ fun IndexScreen(
                         301 to "301–350",
                         351 to "351–400",
                         401 to "401–450",
-                        451 to "451–500"
+                        451 to "451–500",
+                        501 to "501–520"
                     )
                     items(ranges) { (targetId, label) ->
                         Surface(

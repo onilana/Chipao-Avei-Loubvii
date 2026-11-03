@@ -36,7 +36,7 @@ object HymnCatalog {
     @Synchronized
     fun loadFromAssets(context: Context): List<Hymn> {
         val existing = _cachedHymns
-        if (existing != null && existing.size >= 500) {
+        if (existing != null && existing.size >= 520) {
             return existing
         }
         try {

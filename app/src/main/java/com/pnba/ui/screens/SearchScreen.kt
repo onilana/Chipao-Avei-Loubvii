@@ -176,7 +176,7 @@ fun SearchScreen(
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = "Try searching by number (#1 to #500), Poula title, English hymn name, or theme",
+                        text = "Try searching by number (#1 to #520), Poula title, English hymn name, or theme",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
                     )

@@ -4,13 +4,18 @@ add_hymns_501_520.py
 Adds hymns 501-520 from the PDF (the extra 20 hymns beyond the original 500)
 and corrects hymn 500 to its actual title from the PDF.
 """
-import json, os, sys
+import json, os, re, sys
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from scripts.parse_full_hymns import get_categories_for_id, parse_key_pitch
+from pypdf import PdfReader
 
 JSON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..', 'app', 'src', 'main', 'assets', 'hymns.json')
+)
+PDF_PATH = os.environ.get(
+    "PNBA_HYMNAL_PDF",
+    os.path.join(os.path.expanduser("~"), "Downloads", "PNBA Hymnal_compressed.pdf"),
 )
 
 # Category for all extra hymns: Revival, Choruses & Social (continuation of 452-500)
@@ -572,6 +577,90 @@ EXTRA_HYMNS = [
         ]
     ),
 ]
+
+
+def extract_pdf_lyrics(pdf_path):
+    reader = PdfReader(pdf_path)
+    pages = [
+        [line.strip() for line in (page.extract_text() or "").splitlines() if line.strip()]
+        for page in reader.pages
+    ]
+
+    starts = []
+    for page_index, lines in enumerate(pages):
+        for line in lines[:4]:
+            match = re.match(r"^(\d{3})\s*\.\s*", line)
+            if match and 501 <= int(match.group(1)) <= 520:
+                starts.append((int(match.group(1)), page_index))
+                break
+
+    if {hymn_id for hymn_id, _ in starts} != set(range(501, 521)):
+        raise ValueError("The PDF must contain all hymn headings from 501 through 520.")
+
+    expected_verse_counts = {
+        501: 3, 502: 7, 503: 4, 504: 3, 505: 7, 506: 4, 507: 8, 508: 3,
+        509: 4, 510: 3, 511: 4, 512: 5, 513: 4, 514: 7, 515: 3, 516: 5,
+        518: 4, 519: 4,
+    }
+    lyrics_by_id = {}
+
+    for index, (hymn_id, start) in enumerate(starts):
+        end = starts[index + 1][1] if index + 1 < len(starts) else len(pages)
+        verses = {}
+        current_number = None
+        current_lines = []
+        unnumbered_lines = []
+
+        def finish_verse():
+            nonlocal current_number, current_lines
+            if current_number is not None and current_lines:
+                verses[current_number] = current_lines
+            current_number = None
+            current_lines = []
+
+        for page_lines in pages[start + 1:end]:
+            for line in page_lines:
+                if re.match(r"^(Khoras|Chorus)\b", line, re.IGNORECASE):
+                    finish_verse()
+                    continue
+
+                match = re.match(r"^(\d+)\s*\.\s*(.*)$", line)
+                if match:
+                    finish_verse()
+                    current_number = int(match.group(1))
+                    if match.group(2).strip():
+                        current_lines.append(match.group(2).strip())
+                elif current_number is not None:
+                    current_lines.append(line)
+                elif hymn_id in (517, 520):
+                    unnumbered_lines.append(line)
+
+        finish_verse()
+
+        if hymn_id in (517, 520):
+            if not unnumbered_lines:
+                raise ValueError(f"No unnumbered lyrics found for hymn {hymn_id}.")
+            verses = {1: unnumbered_lines}
+        elif len(verses) != expected_verse_counts[hymn_id]:
+            raise ValueError(
+                f"Expected {expected_verse_counts[hymn_id]} verses for hymn {hymn_id}; "
+                f"found {len(verses)}."
+            )
+
+        lyrics_by_id[hymn_id] = [
+            {"verseNumber": number, "lines": lines}
+            for number, lines in sorted(verses.items())
+        ]
+
+    return lyrics_by_id
+
+
+pdf_lyrics = extract_pdf_lyrics(PDF_PATH)
+for hymn in EXTRA_HYMNS:
+    if hymn["id"] == 500:
+        continue
+    hymn["verses"] = pdf_lyrics[hymn["id"]]
+    hymn["firstLine"] = hymn["verses"][0]["lines"][0].rstrip(",;.:")
 
 # ── Load existing hymns and merge ─────────────────────────────────────────────
 with open(JSON_PATH, 'r', encoding='utf-8') as f:

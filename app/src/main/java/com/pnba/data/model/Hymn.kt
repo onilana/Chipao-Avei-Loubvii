@@ -70,7 +70,7 @@ enum class HymnCategory(
     val hymnRange: String,
     val hymnIds: List<Int>
 ) {
-    ALL(0, "All", "1-500", (1..500).toList()),
+    ALL(0, "All", "1-520", (1..520).toList()),
     PRAISE(1, "Praise & Adoration", "1-22, 330", (1..22).toList() + listOf(330)),
     WORSHIP(2, "Worship", "23-53", (23..53).toList()),
     PRAYER(3, "Prayer & Consecration", "54-72, 440", (54..72).toList() + listOf(440)),
@@ -100,7 +100,7 @@ enum class HymnCategory(
     COURAGE(27, "Conflict & Courage", "440-447, 220, 223", (440..447).toList() + listOf(220, 223)),
     JUBILEE(28, "Jubilee", "446, 447", listOf(446, 447)),
     OFFERATORY(29, "Offeratory", "448-451", (448..451).toList()),
-    REVIVAL_CHORUSES(30, "Revival, Choruses & Social", "452-500", (452..500).toList());
+    REVIVAL_CHORUSES(30, "Revival, Choruses & Social", "452-520", (452..520).toList());
 
     companion object {
         fun fromDisplayName(name: String): HymnCategory? {

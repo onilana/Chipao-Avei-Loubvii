@@ -225,7 +225,7 @@ fun AboutScreenContent(
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Text(
-                        text = "The Hymnal contains the complete 500 hymns from the Chipao Avei Loubvü (Christian Hymn Book). It preserves the sacred heritage of congregational worship with full Poula lyrics across all stanzas and refrains, paired with historic Solfa key signatures (Doh is ...), time signatures, classical hymn book references (S.S., C.W.H., Alex., Red.), English cross-reference hymn titles, authors, composers, and scriptural foundations.",
+                        text = "The Hymnal contains 520 hymns from the Chipao Avei Loubvü (Christian Hymn Book). It preserves the sacred heritage of congregational worship with Poula lyrics across all stanzas and refrains, paired with historic Solfa key signatures (Doh is ...), time signatures, classical hymn book references (S.S., C.W.H., Alex., Red.), English cross-reference hymn titles, authors, composers, and scriptural foundations.",
                         style = MaterialTheme.typography.bodyMedium,
                         lineHeight = 22.sp,
                         color = MaterialTheme.colorScheme.onSurface
