@@ -1,0 +1,9 @@
+Cross-Check Report
+==================
+PDF hymns found : 445
+Existing hymns  : 500
+Updated         : 0
+Added           : 0
+Unchanged       : 445
+
+Details:
