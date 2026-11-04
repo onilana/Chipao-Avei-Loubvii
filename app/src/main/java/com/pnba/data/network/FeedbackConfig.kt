@@ -13,5 +13,5 @@ package com.pnba.data.network
  */
 object FeedbackConfig {
     const val WEBHOOK_URL: String = "https://script.google.com/macros/s/AKfycbw1TJpjglSZPGMXiqdEFUj4IfVDyLbIxix7Ai28JfPk3FvyaFZHHhxjR1O8FWSvxCNung/exec"
-    const val UPDATE_CHECK_URL: String = "https://raw.githubusercontent.com/acch4ck/Chipao-Avei-Loubvii/main/version.json"
+    const val UPDATE_CHECK_URL: String = "https://raw.githubusercontent.com/onilana/Chipao-Avei-Loubvii/main/version.json"
 }
