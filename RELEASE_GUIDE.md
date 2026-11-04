@@ -12,7 +12,7 @@ This document outlines the exact, step-by-step procedure to release a new versio
 | **2** | Update version metadata | [`version.json`](file:///c:/Users/MEC-Oni/Downloads/chipao-avei-loubvü/version.json) |
 | **3** | Build signed release APK | `.\gradlew.bat :app:assembleRelease` |
 | **4** | Commit & push to GitHub | `git add . && git commit -m "..." && git push origin main` |
-| **5** | Attach APK to GitHub Release | [`GitHub Releases`](https://github.com/acch4ck/Chipao-Avei-Loubvii/releases/new) |
+| **5** | Attach APK to GitHub Release | [`GitHub Releases`](https://github.com/onilana/Chipao-Avei-Loubvii/releases/new) |
 
 ---
 
@@ -47,7 +47,7 @@ Open [`version.json`](file:///c:/Users/MEC-Oni/Downloads/chipao-avei-loubvü/ver
   "latestVersionCode": 4,
   "latestVersionName": "1.3",
   "releaseNotes": "Corrected hymn typos, updated Solfa key signatures, and improved in-app updater.",
-  "downloadUrl": "https://github.com/acch4ck/Chipao-Avei-Loubvii/releases/latest/download/app-release.apk"
+  "downloadUrl": "https://github.com/onilana/Chipao-Avei-Loubvii/releases/latest/download/app-release.apk"
 }
 ```
 
@@ -88,7 +88,7 @@ git push origin main
 ### Step 5: Publish the Release on GitHub
 
 1. Open your browser and go to:
-   👉 **[https://github.com/acch4ck/Chipao-Avei-Loubvii/releases/new](https://github.com/acch4ck/Chipao-Avei-Loubvii/releases/new)**
+   👉 **[https://github.com/onilana/Chipao-Avei-Loubvii/releases/new](https://github.com/onilana/Chipao-Avei-Loubvii/releases/new)**
 2. In **"Choose a tag"**, type your tag name (e.g., `v1.3`) and click **"Create new tag: v1.3 on main"**.
 3. In **"Release title"**, enter:
    `Chipao Avei Loubvü v1.3`
