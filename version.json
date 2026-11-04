@@ -1,6 +1,6 @@
-{
-  "latestVersionCode": 5,
-  "latestVersionName": "1.4",
-  "releaseNotes": "Expanded hymnal to 520 hymns with complete Poula lyrics, restored stanzas, corrected Solfa key signatures, and verified all hymn numbers.",
-  "downloadUrl": "https://github.com/acch4ck/Chipao-Avei-Loubvii/releases/latest/download/app-release.apk"
+﻿{
+    "latestVersionCode":  6,
+    "latestVersionName":  "1.5",
+    "releaseNotes":  "Hymnal improvements and bug fixes.",
+    "downloadUrl":  "https://github.com/acch4ck/Chipao-Avei-Loubvii/releases/latest/download/app-release.apk"
 }

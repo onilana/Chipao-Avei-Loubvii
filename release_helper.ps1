@@ -28,8 +28,8 @@ Write-Host ""
 $inputName = Read-Host "Enter new Version Name [press Enter for v$currentName or type e.g. 1.4]"
 $newVersionName = if ([string]::IsNullOrWhiteSpace($inputName)) { $currentName } else { $inputName.TrimStart('v').Trim() }
 
-# Automatically increment internal Android versionCode in background
-$newVersionCode = $currentCode + 1
+# Automatically increment internal Android versionCode only if version changed
+$newVersionCode = if ($newVersionName -eq $currentName) { $currentCode } else { $currentCode + 1 }
 
 $releaseNotes = Read-Host "Enter Release Notes summary [e.g. Hymnal updates and bug fixes]"
 if ([string]::IsNullOrWhiteSpace($releaseNotes)) {
@@ -79,7 +79,7 @@ Write-Host "  [OK] Built signed APK successfully! ($apkSizeMB MB)" -ForegroundCo
 # 6. Commit and Push to GitHub
 Write-Host ""
 Write-Host "Pushing updates to GitHub..." -ForegroundColor Cyan
-git add app/build.gradle.kts version.json
+git add -A
 git commit -m ("Release v" + $newVersionName)
 git push origin main
 Write-Host "  [OK] Pushed code to GitHub origin main" -ForegroundColor Green

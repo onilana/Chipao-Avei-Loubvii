@@ -418,16 +418,49 @@ fun HymnDetailScreen(
 
                                 // Stanza Lines
                                 Column(modifier = Modifier.weight(1f)) {
+                                    val hasChoralParts = remember(verse) {
+                                        verse.lines.any { it.matches(Regex("^(Unison|Parts|All|S\\.P|T|T\\.B|Bass|A\\./T|Alto|SP/Alto|T/B|SP|SP/B|Tennor):.*")) }
+                                    }
                                     for (line in verse.lines) {
-                                        Text(
-                                            text = line,
-                                            style = MaterialTheme.typography.bodyLarge.copy(
-                                                fontSize = fontSizeSp.sp,
-                                                lineHeight = (fontSizeSp * 1.5).sp,
-                                                fontFamily = if (useSerifFont) FontFamily.Serif else FontFamily.SansSerif
-                                            ),
-                                            color = MaterialTheme.colorScheme.onBackground
-                                        )
+                                        if (hasChoralParts) {
+                                            val match = Regex("^([A-Za-z0-9./ ]+?:)\\s*(.*)$").find(line)
+                                            val partLabel = match?.groupValues?.get(1) ?: ""
+                                            val lyricText = if (match != null) match.groupValues[2] else line
+                                            Row(modifier = Modifier.fillMaxWidth()) {
+                                                Text(
+                                                    text = partLabel,
+                                                    style = MaterialTheme.typography.bodyLarge.copy(
+                                                        fontSize = fontSizeSp.sp,
+                                                        lineHeight = (fontSizeSp * 1.5).sp,
+                                                        fontStyle = FontStyle.Italic,
+                                                        fontWeight = FontWeight.SemiBold,
+                                                        fontFamily = if (useSerifFont) FontFamily.Serif else FontFamily.SansSerif
+                                                    ),
+                                                    color = MaterialTheme.colorScheme.primary,
+                                                    modifier = Modifier.width(74.dp)
+                                                )
+                                                Text(
+                                                    text = lyricText,
+                                                    style = MaterialTheme.typography.bodyLarge.copy(
+                                                        fontSize = fontSizeSp.sp,
+                                                        lineHeight = (fontSizeSp * 1.5).sp,
+                                                        fontFamily = if (useSerifFont) FontFamily.Serif else FontFamily.SansSerif
+                                                    ),
+                                                    color = MaterialTheme.colorScheme.onBackground,
+                                                    modifier = Modifier.weight(1f)
+                                                )
+                                            }
+                                        } else {
+                                            Text(
+                                                text = line,
+                                                style = MaterialTheme.typography.bodyLarge.copy(
+                                                    fontSize = fontSizeSp.sp,
+                                                    lineHeight = (fontSizeSp * 1.5).sp,
+                                                    fontFamily = if (useSerifFont) FontFamily.Serif else FontFamily.SansSerif
+                                                ),
+                                                color = MaterialTheme.colorScheme.onBackground
+                                            )
+                                        }
                                         Spacer(modifier = Modifier.height(2.dp))
                                     }
                                 }

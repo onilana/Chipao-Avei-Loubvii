@@ -28,6 +28,11 @@ goto fail
 :execute
 set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
+if %ERRORLEVEL% equ 0 goto end
 
 :fail
 exit /b 1
+
+:end
+exit /b 0
+

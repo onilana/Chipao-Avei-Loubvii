@@ -225,7 +225,7 @@ fun AboutScreenContent(
                     Spacer(modifier = Modifier.height(10.dp))
 
                     Text(
-                        text = "The Hymnal contains 520 hymns from the Chipao Avei Loubvü (Christian Hymn Book). It preserves the sacred heritage of congregational worship with Poula lyrics across all stanzas and refrains, paired with historic Solfa key signatures (Doh is ...), time signatures, classical hymn book references (S.S., C.W.H., Alex., Red.), English cross-reference hymn titles, authors, composers, and scriptural foundations.",
+                        text = "The Hymnal contains 520 hymns from the Chipao Avei Loubvü (Poula Hymnal) (Christian Hymn Book). It preserves the sacred heritage of congregational worship with Poula lyrics across all stanzas and refrains, paired with historic Solfa key signatures (Doh is ...), time signatures, classical hymn book references (S.S., C.W.H., Alex., Red.), English cross-reference hymn titles, authors, composers, and scriptural foundations.",
                         style = MaterialTheme.typography.bodyMedium,
                         lineHeight = 22.sp,
                         color = MaterialTheme.colorScheme.onSurface
@@ -326,7 +326,7 @@ fun AboutScreenContent(
                     ) {
                         Icon(imageVector = Icons.Default.BugReport, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text("Report a Typo or Request Hymn")
+                        Text("Feedback")
                     }
                 }
             }
@@ -560,7 +560,7 @@ fun AboutScreenContent(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "Report Typo / Request Hymn",
+                            text = "Report Typo / Feedback",
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold
                         )
