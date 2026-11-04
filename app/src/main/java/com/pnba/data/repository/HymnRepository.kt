@@ -38,7 +38,7 @@ class HymnRepository(private val context: Context) {
     private val _useSerifFont = MutableStateFlow(prefs.getBoolean("pref_use_serif", true))
     val useSerifFont: StateFlow<Boolean> = _useSerifFont.asStateFlow()
 
-    private val _keepScreenAwake = MutableStateFlow(prefs.getBoolean("pref_keep_awake", true))
+    private val _keepScreenAwake = MutableStateFlow(prefs.getBoolean("pref_keep_awake", false))
     val keepScreenAwake: StateFlow<Boolean> = _keepScreenAwake.asStateFlow()
 
     fun getAllHymns(): List<Hymn> = HymnCatalog.loadFromAssets(context)

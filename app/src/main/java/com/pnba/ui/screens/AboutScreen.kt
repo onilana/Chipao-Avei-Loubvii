@@ -322,7 +322,9 @@ fun AboutScreenContent(
                     Button(
                         onClick = onOpenFeedbackDialog,
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                        modifier = Modifier.testTag("report_typo_btn")
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .testTag("report_typo_btn")
                     ) {
                         Icon(imageVector = Icons.Default.BugReport, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(6.dp))
@@ -586,7 +588,11 @@ fun AboutScreenContent(
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                         Button(
-                            onClick = onDismissFeedbackDialog,
+                            onClick = {
+                                reportHymnNumber = ""
+                                reportDetail = ""
+                                onDismissFeedbackDialog()
+                            },
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Text("Done")
@@ -624,10 +630,13 @@ fun AboutScreenContent(
 
                         Spacer(modifier = Modifier.height(10.dp))
 
+                        val isEmailValid = reportEmail.isNotBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(reportEmail.trim()).matches()
+                        val isFormValid = reportDetail.isNotBlank() && reportName.isNotBlank() && isEmailValid
+
                         OutlinedTextField(
                             value = reportName,
                             onValueChange = { reportName = it },
-                            label = { Text("Your Name (optional)") },
+                            label = { Text("Your Name *") },
                             placeholder = { Text("e.g. John Pou") },
                             singleLine = true,
                             enabled = !isSubmitting,
@@ -639,10 +648,14 @@ fun AboutScreenContent(
                         OutlinedTextField(
                             value = reportEmail,
                             onValueChange = { reportEmail = it },
-                            label = { Text("Your Email (optional)") },
+                            label = { Text("Your Email *") },
                             placeholder = { Text("e.g. yourname@example.com") },
                             singleLine = true,
                             enabled = !isSubmitting,
+                            isError = reportEmail.isNotBlank() && !isEmailValid,
+                            supportingText = if (reportEmail.isNotBlank() && !isEmailValid) {
+                                { Text("Please enter a valid email address", color = MaterialTheme.colorScheme.error) }
+                            } else null,
                             modifier = Modifier.fillMaxWidth()
                         )
 
@@ -690,7 +703,7 @@ fun AboutScreenContent(
                                 onClick = {
                                     onSubmitFeedback(reportHymnNumber, reportDetail, reportName, reportEmail)
                                 },
-                                enabled = reportDetail.isNotBlank() && !isSubmitting
+                                enabled = isFormValid && !isSubmitting
                             ) {
                                 if (isSubmitting) {
                                     CircularProgressIndicator(

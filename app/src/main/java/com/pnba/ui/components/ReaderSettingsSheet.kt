@@ -236,7 +236,7 @@ fun ReaderSettingsSheet(
                                 Text(text = "Keep Screen Awake", style = MaterialTheme.typography.titleSmall)
                             }
                             Text(
-                                text = "Screen stays lit during choir & service",
+                                text = if (keepScreenAwake) "Screen stays lit while reading hymns" else "Screen follows system timeout",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )

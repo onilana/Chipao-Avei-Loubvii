@@ -73,9 +73,11 @@ class MainActivity : ComponentActivity() {
             val keepScreenAwake by viewModel.keepScreenAwake.collectAsState()
             val currentScreen by viewModel.currentScreen.collectAsState()
 
-            // Handle Keep Screen Awake flag on the Window
-            LaunchedEffect(keepScreenAwake) {
-                if (keepScreenAwake) {
+            // Handle Keep Screen Awake flag on the Window:
+            // Follows system screen timeout setting by default across the app.
+            // When user enables "Keep Screen Awake", it only prevents sleep while reading a hymn (DETAIL).
+            LaunchedEffect(keepScreenAwake, currentScreen) {
+                if (keepScreenAwake && currentScreen == Screen.DETAIL) {
                     window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
                 } else {
                     window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
