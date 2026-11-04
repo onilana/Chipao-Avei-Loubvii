@@ -50,7 +50,7 @@ $versionJsonObj = [PSCustomObject]@{
     latestVersionCode = $newVersionCode
     latestVersionName = $newVersionName
     releaseNotes      = $releaseNotes
-    downloadUrl       = "https://github.com/acch4ck/Chipao-Avei-Loubvii/releases/latest/download/app-release.apk"
+    downloadUrl       = "https://github.com/onilana/Chipao-Avei-Loubvii/releases/latest/download/app-release.apk"
 }
 $versionJsonStr = $versionJsonObj | ConvertTo-Json -Depth 4
 Set-Content -Path "version.json" -Value $versionJsonStr -Encoding UTF8
@@ -97,6 +97,6 @@ Write-Host "==================================================" -ForegroundColor
 
 # Open folder and browser
 Start-Process explorer.exe "/select,$apkPath"
-Start-Process "https://github.com/acch4ck/Chipao-Avei-Loubvii/releases/new"
+Start-Process "https://github.com/onilana/Chipao-Avei-Loubvii/releases/new"
 
 Write-Host "Done!" -ForegroundColor Green
