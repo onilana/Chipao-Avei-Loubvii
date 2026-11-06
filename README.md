@@ -1,4 +1,4 @@
-# 📖 Chipao Avei Loubvü
+# 📖 Chipao Avei Loubvü [POULA HYMN]
 
 [![Platform](https://img.shields.io/badge/Platform-Android-3DDC84.svg?logo=android&logoColor=white)](https://www.android.com/)
 [![Language](https://img.shields.io/badge/Language-Kotlin%202.0-7F52FF.svg?logo=kotlin&logoColor=white)](https://kotlinlang.org/)
