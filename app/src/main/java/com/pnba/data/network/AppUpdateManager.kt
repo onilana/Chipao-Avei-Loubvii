@@ -88,11 +88,15 @@ object AppUpdateManager {
         val currentName = getCurrentVersionName(context)
         val currentCode = getCurrentVersionCode(context)
 
-        val checkUrl = FeedbackConfig.UPDATE_CHECK_URL.ifBlank {
+        val defaultUrl = FeedbackConfig.UPDATE_CHECK_URL.ifBlank {
             if (FeedbackConfig.WEBHOOK_URL.isNotBlank()) {
                 "${FeedbackConfig.WEBHOOK_URL}?action=check_update"
             } else ""
         }
+        val checkUrl = RemoteConfigManager.getString(
+            RemoteConfigManager.KEY_UPDATE_CHECK_URL,
+            defaultUrl
+        )
 
         if (checkUrl.isBlank()) {
             return@withContext Result.success(

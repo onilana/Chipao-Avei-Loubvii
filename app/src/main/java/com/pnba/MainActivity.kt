@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import com.pnba.data.network.RemoteConfigManager
 import com.pnba.util.AppNotificationManager
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
@@ -66,6 +67,7 @@ class MainActivity : ComponentActivity() {
                 requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
             }
         }
+        RemoteConfigManager.initialize()
         viewModel.checkForAppUpdates(this)
 
         setContent {
