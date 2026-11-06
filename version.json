@@ -1,6 +1,6 @@
 ﻿{
-    "latestVersionCode":  6,
-    "latestVersionName":  "1.5",
-    "releaseNotes":  "Hymnal improvements and bug fixes.",
+    "latestVersionCode":  7,
+    "latestVersionName":  "1.6",
+    "releaseNotes":  "1. Ultra-Compact Landscape Footer (MainActivity.kt)",
     "downloadUrl":  "https://github.com/onilana/Chipao-Avei-Loubvii/releases/latest/download/app-release.apk"
 }

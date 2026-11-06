@@ -1,5 +1,6 @@
 package com.pnba.ui.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -41,6 +42,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -66,18 +68,24 @@ fun HomeScreen(
     val hymnOfTheDay = viewModel.getHymnOfTheDay()
     val seasonal = viewModel.getSeasonalHymns()
 
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .testTag("home_screen"),
-        contentPadding = PaddingValues(bottom = 96.dp)
+        contentPadding = PaddingValues(bottom = if (isLandscape) 24.dp else 96.dp)
     ) {
         // App Header & Branding
         item {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 12.dp)
+                    .padding(
+                        horizontal = if (isLandscape) 16.dp else 20.dp,
+                        vertical = if (isLandscape) 4.dp else 12.dp
+                    )
             ) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -89,32 +97,34 @@ fun HomeScreen(
                             shape = CircleShape,
                             color = MaterialTheme.colorScheme.surface,
                             shadowElevation = 2.dp,
-                            modifier = Modifier.size(46.dp)
+                            modifier = Modifier.size(if (isLandscape) 34.dp else 46.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 Image(
                                     painter = painterResource(id = R.drawable.pnba_logo),
                                     contentDescription = "PNBA Logo",
                                     modifier = Modifier
-                                        .size(42.dp)
+                                        .size(if (isLandscape) 30.dp else 42.dp)
                                         .clip(CircleShape)
                                 )
                             }
                         }
-                        Spacer(modifier = Modifier.width(12.dp))
+                        Spacer(modifier = Modifier.width(if (isLandscape) 8.dp else 12.dp))
                         Column {
                             Text(
                                 text = "Chipao Avei Loubvü",
-                                style = MaterialTheme.typography.titleLarge,
+                                style = if (isLandscape) MaterialTheme.typography.titleMedium else MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onBackground
                             )
-                            Text(
-                                text = "Poumai Naga Baptist Association (PNBA)",
-                                style = MaterialTheme.typography.bodySmall,
-                                fontWeight = FontWeight.Medium,
-                                color = MaterialTheme.colorScheme.primary
-                            )
+                            if (!isLandscape) {
+                                Text(
+                                    text = "Poumai Naga Baptist Association (PNBA)",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    fontWeight = FontWeight.Medium,
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                            }
                         }
                     }
 

@@ -2,6 +2,7 @@ package com.pnba.ui.screens
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -52,6 +53,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
@@ -146,11 +148,14 @@ fun AboutScreenContent(
     var reportName by remember { mutableStateOf("") }
     var reportEmail by remember { mutableStateOf("") }
 
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .testTag("about_screen"),
-        contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 16.dp, bottom = 96.dp)
+        contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = if (isLandscape) 8.dp else 16.dp, bottom = if (isLandscape) 24.dp else 96.dp)
     ) {
         // App Title & Emblem
         item {

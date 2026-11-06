@@ -1,5 +1,6 @@
 package com.pnba.ui.screens
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -47,6 +48,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -89,6 +91,9 @@ fun IndexScreen(
             .sorted()
     }
 
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -98,76 +103,151 @@ fun IndexScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 20.dp, vertical = 12.dp)
+                .padding(
+                    horizontal = if (isLandscape) 16.dp else 20.dp,
+                    vertical = if (isLandscape) 4.dp else 12.dp
+                )
         ) {
-            Text(
-                text = "Hymnal Index",
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-            Text(
-                text = "Browse by numerical grid, alphabetical index, or 30 topical themes",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
+            if (isLandscape) {
+                // In landscape: integrate Title & TabRow on a single compact line
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Hymnal Index",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
 
-            Spacer(modifier = Modifier.height(12.dp))
+                    TabRow(
+                        selectedTabIndex = when (indexMode) {
+                            IndexViewMode.GRID -> 0
+                            IndexViewMode.PAGE -> 1
+                            IndexViewMode.TOPICAL -> 2
+                        },
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                        contentColor = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier
+                            .width(360.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                    ) {
+                        Tab(
+                            selected = indexMode == IndexViewMode.GRID,
+                            onClick = { viewModel.setIndexMode(IndexViewMode.GRID) },
+                            modifier = Modifier
+                                .height(32.dp)
+                                .testTag("tab_grid_index"),
+                            text = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(imageVector = Icons.Default.GridView, contentDescription = null, modifier = Modifier.size(14.dp))
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text("Grid (1-520)", style = MaterialTheme.typography.labelSmall)
+                                }
+                            }
+                        )
+                        Tab(
+                            selected = indexMode == IndexViewMode.PAGE,
+                            onClick = { viewModel.setIndexMode(IndexViewMode.PAGE) },
+                            modifier = Modifier
+                                .height(32.dp)
+                                .testTag("tab_page_index"),
+                            text = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(imageVector = Icons.AutoMirrored.Filled.List, contentDescription = null, modifier = Modifier.size(14.dp))
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text("Page (A-Z)", style = MaterialTheme.typography.labelSmall)
+                                }
+                            }
+                        )
+                        Tab(
+                            selected = indexMode == IndexViewMode.TOPICAL,
+                            onClick = { viewModel.setIndexMode(IndexViewMode.TOPICAL) },
+                            modifier = Modifier
+                                .height(32.dp)
+                                .testTag("tab_topical_index"),
+                            text = {
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(imageVector = Icons.AutoMirrored.Filled.MenuBook, contentDescription = null, modifier = Modifier.size(14.dp))
+                                    Spacer(modifier = Modifier.width(4.dp))
+                                    Text("Topics (1-30)", style = MaterialTheme.typography.labelSmall)
+                                }
+                            }
+                        )
+                    }
+                }
+            } else {
+                Text(
+                    text = "Hymnal Index",
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+                Text(
+                    text = "Browse by numerical grid, alphabetical index, or 30 topical themes",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
 
-            // View Mode Tab Switcher: Grid Index vs Page Index vs Topical Index
-            TabRow(
-                selectedTabIndex = when (indexMode) {
-                    IndexViewMode.GRID -> 0
-                    IndexViewMode.PAGE -> 1
-                    IndexViewMode.TOPICAL -> 2
-                },
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
-                contentColor = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.clip(RoundedCornerShape(12.dp))
-            ) {
-                Tab(
-                    selected = indexMode == IndexViewMode.GRID,
-                    onClick = { viewModel.setIndexMode(IndexViewMode.GRID) },
-                    text = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(imageVector = Icons.Default.GridView, contentDescription = null, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("Grid (1-520)")
-                        }
+                Spacer(modifier = Modifier.height(12.dp))
+
+                // View Mode Tab Switcher: Grid Index vs Page Index vs Topical Index
+                TabRow(
+                    selectedTabIndex = when (indexMode) {
+                        IndexViewMode.GRID -> 0
+                        IndexViewMode.PAGE -> 1
+                        IndexViewMode.TOPICAL -> 2
                     },
-                    modifier = Modifier.testTag("tab_grid_index")
-                )
-                Tab(
-                    selected = indexMode == IndexViewMode.PAGE,
-                    onClick = { viewModel.setIndexMode(IndexViewMode.PAGE) },
-                    text = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(imageVector = Icons.AutoMirrored.Filled.List, contentDescription = null, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("Page (A-Z)")
-                        }
-                    },
-                    modifier = Modifier.testTag("tab_page_index")
-                )
-                Tab(
-                    selected = indexMode == IndexViewMode.TOPICAL,
-                    onClick = { viewModel.setIndexMode(IndexViewMode.TOPICAL) },
-                    text = {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(imageVector = Icons.AutoMirrored.Filled.MenuBook, contentDescription = null, modifier = Modifier.size(16.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text("Topics (1-30)")
-                        }
-                    },
-                    modifier = Modifier.testTag("tab_topical_index")
-                )
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                    contentColor = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clip(RoundedCornerShape(12.dp))
+                ) {
+                    Tab(
+                        selected = indexMode == IndexViewMode.GRID,
+                        onClick = { viewModel.setIndexMode(IndexViewMode.GRID) },
+                        text = {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(imageVector = Icons.Default.GridView, contentDescription = null, modifier = Modifier.size(16.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("Grid (1-520)")
+                            }
+                        },
+                        modifier = Modifier.testTag("tab_grid_index")
+                    )
+                    Tab(
+                        selected = indexMode == IndexViewMode.PAGE,
+                        onClick = { viewModel.setIndexMode(IndexViewMode.PAGE) },
+                        text = {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(imageVector = Icons.AutoMirrored.Filled.List, contentDescription = null, modifier = Modifier.size(16.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("Page (A-Z)")
+                            }
+                        },
+                        modifier = Modifier.testTag("tab_page_index")
+                    )
+                    Tab(
+                        selected = indexMode == IndexViewMode.TOPICAL,
+                        onClick = { viewModel.setIndexMode(IndexViewMode.TOPICAL) },
+                        text = {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(imageVector = Icons.AutoMirrored.Filled.MenuBook, contentDescription = null, modifier = Modifier.size(16.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text("Topics (1-30)")
+                            }
+                        },
+                        modifier = Modifier.testTag("tab_topical_index")
+                    )
+                }
             }
 
             // Thematic Filter Chips (shown when in Grid or Page mode)
             if (indexMode != IndexViewMode.TOPICAL) {
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(if (isLandscape) 4.dp else 8.dp))
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(if (isLandscape) 6.dp else 8.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     val categories = listOf("All") + HymnCategory.topics().map { "${it.number}. ${it.displayName}" }
@@ -199,7 +279,9 @@ fun IndexScreen(
                                 selectedContainerColor = MaterialTheme.colorScheme.primary,
                                 selectedLabelColor = MaterialTheme.colorScheme.onPrimary
                             ),
-                            modifier = Modifier.testTag("filter_chip_$categoryLabel")
+                            modifier = Modifier
+                                .then(if (isLandscape) Modifier.height(28.dp) else Modifier)
+                                .testTag("filter_chip_$categoryLabel")
                         )
                     }
                 }
@@ -218,8 +300,8 @@ fun IndexScreen(
                 LazyRow(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 8.dp),
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        .padding(bottom = if (isLandscape) 4.dp else 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(if (isLandscape) 6.dp else 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     item {
@@ -259,7 +341,10 @@ fun IndexScreen(
                             Text(
                                 text = label,
                                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                                modifier = Modifier.padding(
+                                    horizontal = if (isLandscape) 8.dp else 10.dp,
+                                    vertical = if (isLandscape) 3.dp else 6.dp
+                                )
                             )
                         }
                     }
@@ -267,11 +352,11 @@ fun IndexScreen(
 
                 // Dense, Clean Number Grid for Rapid Navigation
                 LazyVerticalGrid(
-                    columns = GridCells.Fixed(5),
+                    columns = GridCells.Fixed(if (isLandscape) 9 else 5),
                     state = gridState,
-                    contentPadding = PaddingValues(bottom = 96.dp),
-                    horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                    contentPadding = PaddingValues(bottom = if (isLandscape) 24.dp else 96.dp),
+                    horizontalArrangement = Arrangement.spacedBy(if (isLandscape) 6.dp else 10.dp),
+                    verticalArrangement = Arrangement.spacedBy(if (isLandscape) 6.dp else 10.dp),
                     modifier = Modifier
                         .fillMaxSize()
                         .testTag("hymn_number_grid")
@@ -280,11 +365,11 @@ fun IndexScreen(
                         val isFavorite = favoriteIds.contains(hymn.id)
                         Surface(
                             modifier = Modifier
-                                .size(58.dp)
-                                .clip(RoundedCornerShape(14.dp))
+                                .size(if (isLandscape) 42.dp else 58.dp)
+                                .clip(RoundedCornerShape(if (isLandscape) 10.dp else 14.dp))
                                 .clickable { viewModel.openHymn(hymn.id) }
                                 .testTag("grid_hymn_btn_${hymn.id}"),
-                            shape = RoundedCornerShape(14.dp),
+                            shape = RoundedCornerShape(if (isLandscape) 10.dp else 14.dp),
                             color = if (isFavorite) MaterialTheme.colorScheme.primaryContainer
                                    else MaterialTheme.colorScheme.surface,
                             tonalElevation = 2.dp,
@@ -294,19 +379,28 @@ fun IndexScreen(
                                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     Text(
                                         text = "${hymn.id}",
-                                        style = MaterialTheme.typography.titleMedium.copy(
-                                            fontFamily = FontFamily.Monospace,
-                                            fontWeight = FontWeight.Bold
-                                        ),
+                                        style = if (isLandscape) {
+                                            MaterialTheme.typography.titleSmall.copy(
+                                                fontFamily = FontFamily.Monospace,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        } else {
+                                            MaterialTheme.typography.titleMedium.copy(
+                                                fontFamily = FontFamily.Monospace,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        },
                                         color = if (isFavorite) MaterialTheme.colorScheme.primary
                                                else MaterialTheme.colorScheme.onSurface
                                     )
-                                    Text(
-                                        text = hymn.tune.take(4),
-                                        fontSize = 9.sp,
-                                        color = MaterialTheme.colorScheme.secondary,
-                                        maxLines = 1
-                                    )
+                                    if (!isLandscape) {
+                                        Text(
+                                            text = hymn.tune.take(4),
+                                            fontSize = 9.sp,
+                                            color = MaterialTheme.colorScheme.secondary,
+                                            maxLines = 1
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -322,7 +416,7 @@ fun IndexScreen(
             ) {
                 LazyColumn(
                     state = listState,
-                    contentPadding = PaddingValues(bottom = 96.dp, end = 36.dp),
+                    contentPadding = PaddingValues(bottom = if (isLandscape) 24.dp else 96.dp, end = 36.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier
                         .fillMaxSize()
@@ -362,7 +456,7 @@ fun IndexScreen(
             // --- TOPICAL INDEX (THEMATIC REGISTRY 1-30) ---
             val topics = remember { HymnCategory.topics() }
             LazyColumn(
-                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 96.dp),
+                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = if (isLandscape) 4.dp else 8.dp, bottom = if (isLandscape) 24.dp else 96.dp),
                 verticalArrangement = Arrangement.spacedBy(10.dp),
                 modifier = Modifier
                     .fillMaxSize()
