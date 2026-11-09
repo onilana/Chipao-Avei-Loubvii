@@ -10,7 +10,14 @@ Write-Host "  Chipao Avei Loubvu -- App Release Helper" -ForegroundColor Cyan
 Write-Host "==================================================" -ForegroundColor Cyan
 Write-Host ""
 
-# 1. Read current version from app/build.gradle.kts
+# 1. Sync with GitHub & read current version from app/build.gradle.kts
+Write-Host "Checking for remote updates..." -ForegroundColor Cyan
+git pull origin main
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Warning: Could not sync with remote GitHub repository. Continuing with local files..." -ForegroundColor Yellow
+}
+Write-Host ""
+
 $gradleFile = "app\build.gradle.kts"
 $content = Get-Content $gradleFile -Raw
 
@@ -82,7 +89,13 @@ Write-Host "Pushing updates to GitHub..." -ForegroundColor Cyan
 git add -A
 git commit -m ("Release v" + $newVersionName)
 git push origin main
-Write-Host "  [OK] Pushed code to GitHub origin main" -ForegroundColor Green
+
+if ($LASTEXITCODE -eq 0) {
+    Write-Host "  [OK] Pushed code to GitHub origin main" -ForegroundColor Green
+} else {
+    Write-Host "  [ERROR] Failed to push code to GitHub origin main!" -ForegroundColor Red
+    Write-Host "  Please run 'git pull' and 'git push' manually to complete the sync." -ForegroundColor Yellow
+}
 
 # 7. Open GitHub Release page and highlight APK in Explorer
 Write-Host ""
