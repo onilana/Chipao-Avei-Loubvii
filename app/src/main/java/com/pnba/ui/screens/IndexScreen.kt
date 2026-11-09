@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -83,12 +84,25 @@ fun IndexScreen(
     val listState = rememberLazyListState()
     val gridState = rememberLazyGridState()
 
-    // Distinct starting letters for the alphabetical scrubber
-    val letters = remember(filteredHymns) {
-        filteredHymns
-            .map { it.title.firstOrNull()?.uppercaseChar() ?: 'A' }
-            .distinct()
-            .sorted()
+    // Alphabetical list of hymns for the PAGE index view
+    val pageHymns = remember(filteredHymns) {
+        filteredHymns.sortedWith(
+            compareBy(String.CASE_INSENSITIVE_ORDER) {
+                it.title.trimStart { c -> !c.isLetter() }
+            }
+        )
+    }
+
+    // Complete A-Z alphabet for the alphabetical scrubber
+    val alphabet = remember { ('A'..'Z').toList() }
+
+    // Set of letters that actually have hymns in the current view/filter
+    val availableLetters = remember(pageHymns) {
+        pageHymns
+            .mapNotNull {
+                it.title.trimStart { c -> !c.isLetter() }.firstOrNull()?.uppercaseChar()
+            }
+            .toSet()
     }
 
     val configuration = LocalConfiguration.current
@@ -422,7 +436,7 @@ fun IndexScreen(
                         .fillMaxSize()
                         .testTag("page_index_list")
                 ) {
-                    items(filteredHymns, key = { it.id }) { hymn ->
+                    items(pageHymns, key = { it.id }) { hymn ->
                         HymnListItem(
                             hymn = hymn,
                             isFavorite = favoriteIds.contains(hymn.id),
@@ -433,12 +447,27 @@ fun IndexScreen(
                 }
 
                 // Sticky Alphabetical Scrubber positioned along the right edge
-                if (letters.isNotEmpty()) {
+                if (pageHymns.isNotEmpty()) {
                     StickyScrubber(
-                        letters = letters,
+                        letters = alphabet,
+                        availableLetters = availableLetters,
                         onLetterSelected = { selectedChar ->
-                            val targetIndex = filteredHymns.indexOfFirst {
-                                it.title.startsWith(selectedChar, ignoreCase = true)
+                            val cleanLetter = selectedChar.uppercaseChar()
+                            // Exact starting letter match
+                            var targetIndex = pageHymns.indexOfFirst {
+                                val firstChar = it.title.trimStart { c -> !c.isLetter() }.firstOrNull()?.uppercaseChar()
+                                firstChar == cleanLetter
+                            }
+                            // If no hymn starts with this exact letter, scroll to the nearest subsequent letter
+                            if (targetIndex == -1) {
+                                targetIndex = pageHymns.indexOfFirst {
+                                    val firstChar = it.title.trimStart { c -> !c.isLetter() }.firstOrNull()?.uppercaseChar()
+                                    firstChar != null && firstChar > cleanLetter
+                                }
+                            }
+                            // If letter is after all available hymns (e.g. Z), scroll to bottom
+                            if (targetIndex == -1 && pageHymns.isNotEmpty()) {
+                                targetIndex = pageHymns.lastIndex
                             }
                             if (targetIndex != -1) {
                                 coroutineScope.launch {
@@ -448,7 +477,12 @@ fun IndexScreen(
                         },
                         modifier = Modifier
                             .align(Alignment.CenterEnd)
-                            .padding(end = 4.dp)
+                            .fillMaxHeight()
+                            .padding(
+                                top = if (isLandscape) 4.dp else 8.dp,
+                                bottom = if (isLandscape) 20.dp else 88.dp,
+                                end = 2.dp
+                            )
                     )
                 }
             }
