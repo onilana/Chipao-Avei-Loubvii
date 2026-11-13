@@ -66,6 +66,7 @@ fun HomeScreen(
     val favorites = viewModel.getFavorites()
     val recents = viewModel.getRecents()
     val hymnOfTheDay = viewModel.getHymnOfTheDay()
+    val hymnOccasion = viewModel.getHymnOfTheDayOccasion()
     val seasonal = viewModel.getSeasonalHymns()
 
     val configuration = LocalConfiguration.current
@@ -209,7 +210,7 @@ fun HomeScreen(
                                     color = MaterialTheme.colorScheme.surfaceVariant
                                 ) {
                                     Text(
-                                        text = "Hymn #${hymnOfTheDay.id} • ${hymnOfTheDay.category}",
+                                        text = "Hymn #${hymnOfTheDay.id} • $hymnOccasion",
                                         style = MaterialTheme.typography.labelSmall,
                                         color = MaterialTheme.colorScheme.secondary,
                                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
@@ -365,7 +366,7 @@ fun HomeScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "SEASONAL SELECTIONS",
+                            text = "${hymnOccasion.uppercase()} SELECTIONS",
                             style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onBackground,

@@ -11,6 +11,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import com.pnba.data.network.RemoteConfigManager
+import com.pnba.ui.components.AnnouncementDialog
 import com.pnba.util.AppNotificationManager
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
@@ -83,13 +84,17 @@ class MainActivity : ComponentActivity() {
                 requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
             }
         }
-        RemoteConfigManager.initialize()
+        RemoteConfigManager.initialize {
+            viewModel.checkAnnouncements(this)
+        }
+        viewModel.checkAnnouncements(this)
         viewModel.checkForAppUpdates(this)
 
         setContent {
             val readingTheme by viewModel.readingTheme.collectAsState()
             val keepScreenAwake by viewModel.keepScreenAwake.collectAsState()
             val currentScreen by viewModel.currentScreen.collectAsState()
+            val activeAnnouncement by viewModel.activeAnnouncement.collectAsState()
 
             // Handle Keep Screen Awake flag on the Window:
             // Follows system screen timeout setting by default across the app.
@@ -103,6 +108,14 @@ class MainActivity : ComponentActivity() {
             }
 
             SanctuaryHymnalTheme(readingTheme = readingTheme) {
+                // Remote Config Announcement Popup Holder
+                activeAnnouncement?.let { announcement ->
+                    AnnouncementDialog(
+                        announcement = announcement,
+                        onDismiss = { viewModel.dismissAnnouncement(this, announcement.id) }
+                    )
+                }
+
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize()

@@ -42,6 +42,11 @@ render.experimental.xml
 *.keystore
 release-key.jks
 
+# Private Admin Guides & Instructions (KEEP PRIVATE! NEVER COMMIT TO PUBLIC GITHUB)
+FIREBASE_ANNOUNCEMENT_GUIDE.md
+*PRIVATE*
+*private*
+
 # Google Services / Sensitive API Keys (if private)
 # google-services.json
 

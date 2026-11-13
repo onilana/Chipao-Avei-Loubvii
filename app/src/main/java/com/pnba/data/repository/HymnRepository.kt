@@ -45,25 +45,186 @@ class HymnRepository(private val context: Context) {
 
     fun getHymnById(id: Int): Hymn? = HymnCatalog.loadFromAssets(context).find { it.id == id }
 
+    data class OccasionTheme(
+        val occasionName: String,
+        val hymns: List<Hymn>
+    )
+
+    private fun calculateEaster(year: Int): Calendar {
+        val a = year % 19
+        val b = year / 100
+        val c = year % 100
+        val d = b / 4
+        val e = b % 4
+        val f = (b + 8) / 25
+        val g = (b - f + 1) / 3
+        val h = (19 * a + b - d - g + 15) % 30
+        val i = c / 4
+        val k = c % 4
+        val l = (32 + 2 * e + 2 * i - h - k) % 7
+        val m = (a + 11 * h + 22 * l) / 451
+        val month = (h + l - 7 * m + 114) / 31
+        val day = ((h + l - 7 * m + 114) % 31) + 1
+        return Calendar.getInstance().apply {
+            set(Calendar.YEAR, year)
+            set(Calendar.MONTH, month - 1)
+            set(Calendar.DAY_OF_MONTH, day)
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+    }
+
+    /**
+     * Determines the active liturgical, seasonal, or calendar occasion and its curated hymns.
+     */
+    fun getCurrentOccasionTheme(): OccasionTheme {
+        val all = getAllHymns()
+        if (all.isEmpty()) return OccasionTheme("Daily Devotion", emptyList())
+
+        val cal = Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR)
+        val month = cal.get(Calendar.MONTH) // 0-based: 0 = Jan, 11 = Dec
+        val dayOfMonth = cal.get(Calendar.DAY_OF_MONTH)
+        val dayOfWeek = cal.get(Calendar.DAY_OF_WEEK)
+
+        // 1. New Year (Dec 31 - Jan 7)
+        if ((month == 11 && dayOfMonth == 31) || (month == 0 && dayOfMonth <= 7)) {
+            val newYearHymns = all.filter { it.belongsToCategory("New Year") }
+                .ifEmpty { all.filter { it.belongsToCategory("Praise & Adoration") } }
+            return OccasionTheme("New Year Celebration", newYearHymns)
+        }
+
+        // 2. Christmas Season (Dec 1 - Dec 30)
+        if (month == 11) {
+            val christmasHymns = all.filter { it.belongsToCategory("Christmas") }
+            val occasion = when (dayOfMonth) {
+                in 24..25 -> "Christmas Celebration"
+                in 26..30 -> "Christmastide"
+                else -> "Advent & Christmas"
+            }
+            return OccasionTheme(occasion, christmasHymns)
+        }
+
+        // 3. Easter Cycle (Lent, Palm Sunday, Passion Week, Good Friday, Easter Sunday, Eastertide)
+        val easterCal = calculateEaster(year)
+        val todayMid = Calendar.getInstance().apply {
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }
+        val diffDays = ((todayMid.timeInMillis - easterCal.timeInMillis) / (24L * 60L * 60L * 1000L))
+
+        when (diffDays) {
+            -7L -> {
+                val palmHymns = all.filter { it.belongsToCategory("Palm Sunday") }
+                    .ifEmpty { all.filter { it.belongsToCategory("Praise & Adoration") } }
+                return OccasionTheme("Palm Sunday", palmHymns)
+            }
+            in -6L..-1L -> {
+                val passionHymns = all.filter {
+                    it.belongsToCategory("Good Friday & Easter Sunday") || it.belongsToCategory("Lord’s Supper")
+                }
+                val label = if (diffDays == -2L) "Good Friday" else "Passion Week"
+                return OccasionTheme(label, passionHymns)
+            }
+            0L -> {
+                val easterHymns = all.filter { it.belongsToCategory("Good Friday & Easter Sunday") && it.id >= 398 }
+                    .ifEmpty { all.filter { it.belongsToCategory("Good Friday & Easter Sunday") } }
+                return OccasionTheme("Easter Sunday", easterHymns)
+            }
+            in 1L..7L -> {
+                val eastertideHymns = all.filter { it.belongsToCategory("Good Friday & Easter Sunday") }
+                return OccasionTheme("Easter Season", eastertideHymns)
+            }
+            in -46L..-8L -> {
+                val lentHymns = all.filter {
+                    it.belongsToCategory("Repentance, Commitment & Hope") ||
+                    it.belongsToCategory("Faith & Trust") ||
+                    it.belongsToCategory("Prayer & Consecration")
+                }
+                return OccasionTheme("Lenten Devotion", lentHymns)
+            }
+            in 49L..50L -> {
+                val pentecostHymns = all.filter {
+                    it.belongsToCategory("Prayer & Consecration") || it.belongsToCategory("Christian Experience")
+                }
+                return OccasionTheme("Pentecost", pentecostHymns)
+            }
+        }
+
+        // 4. Mother's Day (Second Sunday of May)
+        if (month == 4 && (dayOfWeek == Calendar.SUNDAY && dayOfMonth in 8..14)) {
+            val mothersHymns = all.filter { it.belongsToCategory("Mothers’ & Fathers’ Day") }
+            return OccasionTheme("Mother's Day", mothersHymns)
+        }
+
+        // 5. Father's Day (Third Sunday of June)
+        if (month == 5 && (dayOfWeek == Calendar.SUNDAY && dayOfMonth in 15..21)) {
+            val fathersHymns = all.filter { it.belongsToCategory("Mothers’ & Fathers’ Day") }
+            return OccasionTheme("Father's Day", fathersHymns)
+        }
+
+        // 6. Missions Month (October Sundays)
+        if (month == 9 && dayOfWeek == Calendar.SUNDAY) {
+            val missionHymns = all.filter { it.belongsToCategory("Mission & Evangelism") }
+            return OccasionTheme("Missions & Evangelism", missionHymns)
+        }
+
+        // 7. General Day-of-Week Liturgical Focus
+        return when (dayOfWeek) {
+            Calendar.SUNDAY -> OccasionTheme(
+                "Sunday Worship",
+                all.filter { it.belongsToCategory("Worship") || it.belongsToCategory("Praise & Adoration") }
+            )
+            Calendar.MONDAY -> OccasionTheme(
+                "Faith & Trust",
+                all.filter { it.belongsToCategory("Faith & Trust") }
+            )
+            Calendar.TUESDAY -> OccasionTheme(
+                "Love & Assurance",
+                all.filter { it.belongsToCategory("Love") || it.belongsToCategory("Assurance & Testimony") }
+            )
+            Calendar.WEDNESDAY -> OccasionTheme(
+                "Guidance & Living",
+                all.filter { it.belongsToCategory("Guidance") || it.belongsToCategory("Christian Experience") }
+            )
+            Calendar.THURSDAY -> OccasionTheme(
+                "The Gospel of Christ",
+                all.filter { it.belongsToCategory("The Gospel") || it.belongsToCategory("Gospel Invitation") }
+            )
+            Calendar.FRIDAY -> OccasionTheme(
+                "Prayer & Consecration",
+                all.filter { it.belongsToCategory("Prayer & Consecration") || it.belongsToCategory("Repentance, Commitment & Hope") }
+            )
+            Calendar.SATURDAY -> OccasionTheme(
+                "Hope & Heavenly Home",
+                all.filter { it.belongsToCategory("Heavenly Home") || it.belongsToCategory("Second Coming & Rapture") }
+            )
+            else -> OccasionTheme("Daily Hymn", all)
+        }
+    }
+
     fun getHymnOfTheDay(): Hymn {
-        val list = getAllHymns()
-        if (list.isEmpty()) return HymnCatalog.hymns.first()
+        val theme = getCurrentOccasionTheme()
+        val pool = theme.hymns.ifEmpty { getAllHymns() }
+        if (pool.isEmpty()) return HymnCatalog.hymns.first()
         val cal = Calendar.getInstance()
         val dayOfYear = cal.get(Calendar.DAY_OF_YEAR)
-        val index = (dayOfYear - 1) % list.size
-        return list[index]
+        val index = (dayOfYear - 1) % pool.size
+        return pool[index]
+    }
+
+    fun getHymnOfTheDayOccasion(): String {
+        return getCurrentOccasionTheme().occasionName
     }
 
     fun getSeasonalHymns(): List<Hymn> {
-        val all = getAllHymns()
-        val cal = Calendar.getInstance()
-        val month = cal.get(Calendar.MONTH) // 0 = Jan, 11 = Dec
-        return when (month) {
-            11 -> all.filter { it.belongsToCategory("Christmas") }.ifEmpty { all.take(6) }.take(6)
-            0 -> all.filter { it.belongsToCategory("New Year") || it.belongsToCategory("Praise & Adoration") }.take(6)
-            2, 3 -> all.filter { it.belongsToCategory("Good Friday & Easter Sunday") || it.belongsToCategory("The Gospel") }.take(6)
-            else -> all.filter { it.belongsToCategory("Worship") || it.belongsToCategory("Praise & Adoration") }.take(6)
-        }
+        val theme = getCurrentOccasionTheme()
+        val pool = theme.hymns.ifEmpty { getAllHymns() }
+        return pool.take(6)
     }
 
     // --- Favorites ---
@@ -82,7 +243,13 @@ class HymnRepository(private val context: Context) {
 
     private fun loadFavorites(): Set<Int> {
         val raw = prefs.getString("favorites_set", "") ?: ""
-        if (raw.isBlank()) return setOf(1, 2, 51, 100) // Default favorites
+        // Clear out any old legacy default pre-bookmarks so user starts clean
+        if (raw.isBlank() || raw == "1,2,51,100" || raw == "1, 2, 51, 100") {
+            if (raw.isNotBlank()) {
+                prefs.edit().remove("favorites_set").apply()
+            }
+            return emptySet()
+        }
         return raw.split(",")
             .mapNotNull { it.trim().toIntOrNull() }
             .toSet()

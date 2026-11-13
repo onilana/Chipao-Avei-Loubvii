@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.pnba.data.model.Hymn
 import com.pnba.data.model.ReadingTheme
 import com.pnba.data.model.TopicalIndexItem
+import com.pnba.data.network.Announcement
 import com.pnba.data.network.AppUpdateInfo
 import com.pnba.data.network.AppUpdateManager
 import com.pnba.data.network.FeedbackConfig
 import com.pnba.data.network.FeedbackService
+import com.pnba.data.network.RemoteConfigManager
 import com.pnba.data.repository.HymnCatalog
 import com.pnba.data.repository.HymnRepository
 import com.pnba.sound.PitchPipePlayer
@@ -103,6 +105,10 @@ class HymnalViewModel(application: Application) : AndroidViewModel(application) 
     // App Update State
     private val _updateInfo = MutableStateFlow<AppUpdateInfo?>(null)
     val updateInfo: StateFlow<AppUpdateInfo?> = _updateInfo.asStateFlow()
+
+    // Remote Config Announcement State
+    private val _activeAnnouncement = MutableStateFlow<Announcement?>(null)
+    val activeAnnouncement: StateFlow<Announcement?> = _activeAnnouncement.asStateFlow()
 
     private val _isCheckingUpdate = MutableStateFlow(false)
     val isCheckingUpdate: StateFlow<Boolean> = _isCheckingUpdate.asStateFlow()
@@ -232,6 +238,8 @@ class HymnalViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun getHymnOfTheDay(): Hymn = repository.getHymnOfTheDay()
+
+    fun getHymnOfTheDayOccasion(): String = repository.getHymnOfTheDayOccasion()
 
     fun getSeasonalHymns(): List<Hymn> = repository.getSeasonalHymns()
 
@@ -405,6 +413,34 @@ class HymnalViewModel(application: Application) : AndroidViewModel(application) 
                 _downloadStatusMessage.value = "Download failed: ${result.exceptionOrNull()?.localizedMessage ?: "Network error"}"
             }
         }
+    }
+
+    /**
+     * Checks Firebase Remote Config for any active announcement and compares with
+     * the last dismissed ID stored in SharedPreferences.
+     */
+    fun checkAnnouncements(context: Context) {
+        val announcement = RemoteConfigManager.getActiveAnnouncement()
+        if (announcement == null) {
+            _activeAnnouncement.value = null
+            return
+        }
+        val prefs = context.getSharedPreferences("pnba_announcements", Context.MODE_PRIVATE)
+        val lastDismissedId = prefs.getString("last_dismissed_announcement_id", "")
+        if (lastDismissedId != announcement.id) {
+            _activeAnnouncement.value = announcement
+        } else {
+            _activeAnnouncement.value = null
+        }
+    }
+
+    /**
+     * Dismisses the current announcement popup and records its ID so it does not reappear.
+     */
+    fun dismissAnnouncement(context: Context, announcementId: String) {
+        val prefs = context.getSharedPreferences("pnba_announcements", Context.MODE_PRIVATE)
+        prefs.edit().putString("last_dismissed_announcement_id", announcementId).apply()
+        _activeAnnouncement.value = null
     }
 
     override fun onCleared() {
