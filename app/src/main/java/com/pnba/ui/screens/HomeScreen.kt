@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.SystemUpdate
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -43,6 +44,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -55,12 +57,14 @@ import com.pnba.data.model.Hymn
 import com.pnba.ui.HymnalViewModel
 import com.pnba.ui.Screen
 import com.pnba.ui.components.QuickEntryKeypad
+import com.pnba.ui.components.UpdateDialog
 
 @Composable
 fun HomeScreen(
     viewModel: HymnalViewModel,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val keypadInput by viewModel.keypadInput.collectAsState()
     val previewHymn by viewModel.keypadPreviewHymn.collectAsState()
     val favorites = viewModel.getFavorites()
@@ -69,8 +73,25 @@ fun HomeScreen(
     val hymnOccasion = viewModel.getHymnOfTheDayOccasion()
     val seasonal = viewModel.getSeasonalHymns()
 
+    val updateInfo by viewModel.updateInfo.collectAsState()
+    val showUpdateDialog by viewModel.showUpdateDialog.collectAsState()
+    val activeAnnouncement by viewModel.activeAnnouncement.collectAsState()
+
     val configuration = LocalConfiguration.current
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    // Update popup dialog on homescreen
+    if (showUpdateDialog && updateInfo?.isUpdateAvailable == true && activeAnnouncement == null) {
+        UpdateDialog(
+            updateInfo = updateInfo!!,
+            onGoToAbout = {
+                viewModel.openUpdateInAbout(context, updateInfo?.latestVersion)
+            },
+            onDismiss = {
+                viewModel.dismissUpdateDialog(context, updateInfo?.latestVersion)
+            }
+        )
+    }
 
     LazyColumn(
         modifier = modifier
@@ -147,6 +168,72 @@ fun HomeScreen(
                                 modifier = Modifier.size(20.dp)
                             )
                         }
+                    }
+                }
+            }
+        }
+
+        // New Version Available Banner linking to About Page
+        if (updateInfo?.isUpdateAvailable == true) {
+            item {
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 6.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .clickable { viewModel.openUpdateInAbout(context, updateInfo?.latestVersion) }
+                        .testTag("home_update_banner")
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 14.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Row(
+                            modifier = Modifier.weight(1f),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Surface(
+                                shape = CircleShape,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(34.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.SystemUpdate,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.onPrimary,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Column {
+                                Text(
+                                    text = "New Update Available (v${updateInfo?.latestVersion})",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                                Text(
+                                    text = "Tap to view update in About page",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
+                                )
+                            }
+                        }
+                        Icon(
+                            imageVector = Icons.Default.ChevronRight,
+                            contentDescription = "Go to About",
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                            modifier = Modifier.size(20.dp)
+                        )
                     }
                 }
             }

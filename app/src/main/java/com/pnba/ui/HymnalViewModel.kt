@@ -106,6 +106,12 @@ class HymnalViewModel(application: Application) : AndroidViewModel(application) 
     private val _updateInfo = MutableStateFlow<AppUpdateInfo?>(null)
     val updateInfo: StateFlow<AppUpdateInfo?> = _updateInfo.asStateFlow()
 
+    private val _showUpdateDialog = MutableStateFlow(false)
+    val showUpdateDialog: StateFlow<Boolean> = _showUpdateDialog.asStateFlow()
+
+    private val _shouldScrollToUpdate = MutableStateFlow(false)
+    val shouldScrollToUpdate: StateFlow<Boolean> = _shouldScrollToUpdate.asStateFlow()
+
     // Remote Config Announcement State
     private val _activeAnnouncement = MutableStateFlow<Announcement?>(null)
     val activeAnnouncement: StateFlow<Announcement?> = _activeAnnouncement.asStateFlow()
@@ -357,7 +363,7 @@ class HymnalViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun checkForAppUpdates(context: Context) {
+    fun checkForAppUpdates(context: Context, manual: Boolean = false) {
         viewModelScope.launch {
             _isCheckingUpdate.value = true
             _updateCheckStatus.value = null
@@ -368,14 +374,42 @@ class HymnalViewModel(application: Application) : AndroidViewModel(application) 
                 _updateInfo.value = info
                 if (info?.isUpdateAvailable == true) {
                     _updateCheckStatus.value = "New release v${info.latestVersion} is available!"
+                    val prefs = context.getSharedPreferences("pnba_app_updates", Context.MODE_PRIVATE)
+                    val lastDismissedVersion = prefs.getString("last_dismissed_update_version", "")
+                    if (manual || lastDismissedVersion != info.latestVersion) {
+                        _showUpdateDialog.value = true
+                    }
                 } else {
                     val curName = info?.currentVersion ?: AppUpdateManager.getCurrentVersionName(context)
                     _updateCheckStatus.value = "You are on the latest version (v$curName)."
+                    _showUpdateDialog.value = false
                 }
             } else {
                 _updateCheckStatus.value = "Could not check for updates. Please check your connection."
             }
         }
+    }
+
+    fun dismissUpdateDialog(context: Context, version: String? = null) {
+        _showUpdateDialog.value = false
+        if (!version.isNullOrBlank()) {
+            val prefs = context.getSharedPreferences("pnba_app_updates", Context.MODE_PRIVATE)
+            prefs.edit().putString("last_dismissed_update_version", version).apply()
+        }
+    }
+
+    fun setShowUpdateDialog(show: Boolean) {
+        _showUpdateDialog.value = show
+    }
+
+    fun openUpdateInAbout(context: Context, version: String? = null) {
+        dismissUpdateDialog(context, version)
+        _shouldScrollToUpdate.value = true
+        navigateTo(Screen.ABOUT)
+    }
+
+    fun resetScrollToUpdate() {
+        _shouldScrollToUpdate.value = false
     }
 
     fun downloadAndInstallUpdate(context: Context, downloadUrl: String) {

@@ -86,6 +86,7 @@ class MainActivity : ComponentActivity() {
         }
         RemoteConfigManager.initialize {
             viewModel.checkAnnouncements(this)
+            viewModel.checkForAppUpdates(this)
         }
         viewModel.checkAnnouncements(this)
         viewModel.checkForAppUpdates(this)

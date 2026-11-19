@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -45,6 +46,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -88,6 +90,7 @@ fun AboutScreen(
     val isDownloadingUpdate by viewModel.isDownloadingUpdate.collectAsState()
     val downloadProgress by viewModel.downloadProgress.collectAsState()
     val downloadStatus by viewModel.downloadStatusMessage.collectAsState()
+    val shouldScrollToUpdate by viewModel.shouldScrollToUpdate.collectAsState()
 
     AboutScreenContent(
         showFeedbackDialog = showFeedbackDialog,
@@ -100,9 +103,11 @@ fun AboutScreen(
         isDownloadingUpdate = isDownloadingUpdate,
         downloadProgress = downloadProgress,
         downloadStatus = downloadStatus,
+        shouldScrollToUpdate = shouldScrollToUpdate,
+        onResetScrollToUpdate = { viewModel.resetScrollToUpdate() },
         onDismissFeedbackDialog = { viewModel.setFeedbackDialogVisible(false) },
         onOpenFeedbackDialog = { viewModel.setFeedbackDialogVisible(true) },
-        onCheckUpdate = { viewModel.checkForAppUpdates(context) },
+        onCheckUpdate = { viewModel.checkForAppUpdates(context, manual = true) },
         onDownloadAndInstall = { url -> viewModel.downloadAndInstallUpdate(context, url) },
         onSubmitFeedback = { hymnNumber, detail, name, email ->
             viewModel.submitFeedback(
@@ -134,6 +139,8 @@ fun AboutScreenContent(
     isDownloadingUpdate: Boolean = false,
     downloadProgress: Float? = null,
     downloadStatus: String? = null,
+    shouldScrollToUpdate: Boolean = false,
+    onResetScrollToUpdate: () -> Unit = {},
     onDismissFeedbackDialog: () -> Unit,
     onOpenFeedbackDialog: () -> Unit,
     onCheckUpdate: () -> Unit,
@@ -143,6 +150,15 @@ fun AboutScreenContent(
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(shouldScrollToUpdate) {
+        if (shouldScrollToUpdate) {
+            listState.animateScrollToItem(4)
+            onResetScrollToUpdate()
+        }
+    }
+
     var reportHymnNumber by remember { mutableStateOf("") }
     var reportDetail by remember { mutableStateOf("") }
     var reportName by remember { mutableStateOf("") }
@@ -152,6 +168,7 @@ fun AboutScreenContent(
     val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     LazyColumn(
+        state = listState,
         modifier = modifier
             .fillMaxSize()
             .testTag("about_screen"),
@@ -234,6 +251,43 @@ fun AboutScreenContent(
                         style = MaterialTheme.typography.bodyMedium,
                         lineHeight = 22.sp,
                         color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Spacer(modifier = Modifier.height(14.dp))
+
+                    Text(
+                        text = "EDITION & PRINTING HISTORY",
+                        style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.secondary,
+                        letterSpacing = 1.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(6.dp))
+
+                    Text(
+                        text = """
+                            1st Edition 1981 - 5,000 Copies
+                            2nd Edition 1992 - 9,000 Copies
+                            3rd Edition 2002 - 15,000 Copies
+                            4th Edition 2007
+                            With Tonic Solfa - 10,000 Copies
+                            Without Tonic Solfa - 5,000 Copies
+                            5th Edition 20...
+                            With Tonic Solfa - 10,000 Copies
+                            Without Tonic Solfa - 5,000 Copies
+                        """.trimIndent(),
+                        style = MaterialTheme.typography.bodyMedium,
+                        lineHeight = 22.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Text(
+                        text = "Typeset & Layout:\nPNBA Computer Centre,\nSenapati, Manipur.",
+                        style = MaterialTheme.typography.bodySmall,
+                        lineHeight = 18.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }

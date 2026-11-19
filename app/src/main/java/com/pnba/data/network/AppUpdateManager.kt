@@ -130,9 +130,13 @@ object AppUpdateManager {
                 val latestCode = json.optInt("latestVersionCode", currentCode)
                 val latestName = json.optString("latestVersionName", currentName)
                 val notes = json.optString("releaseNotes", "")
-                val downloadUrl = json.optString("downloadUrl", "")
+                val fallbackDownloadUrl = RemoteConfigManager.getString(
+                    RemoteConfigManager.KEY_DOWNLOAD_URL,
+                    "https://github.com/onilana/Chipao-Avei-Loubvii/releases/latest/download/app-release.apk"
+                )
+                val downloadUrl = json.optString("downloadUrl", fallbackDownloadUrl).ifBlank { fallbackDownloadUrl }
 
-                val updateAvailable = isVersionNewer(latest = latestName, current = currentName)
+                val updateAvailable = isVersionNewer(latest = latestName, current = currentName) || (latestCode > currentCode)
                 if (updateAvailable) {
                     AppNotificationManager.showUpdateNotification(
                         context = context,
