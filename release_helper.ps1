@@ -105,6 +105,16 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "  Please run 'git pull' and 'git push' manually to complete the sync." -ForegroundColor Yellow
 }
 
+# Optional: Push full code backup to Private repository if configured
+$remotes = (git remote) -split "`r?`n"
+if ($remotes -contains "private") {
+    Write-Host "Backing up full source to private repository..." -ForegroundColor Cyan
+    git push private source:main
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  [OK] Pushed full code to private repository" -ForegroundColor Green
+    }
+}
+
 # 7. Open GitHub Release page and highlight artifacts in Explorer
 Write-Host ""
 Write-Host "==================================================" -ForegroundColor Cyan
