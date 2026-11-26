@@ -62,6 +62,3 @@ Thumbs.db
 # Python caches from scripts
 __pycache__/
 *.pyc
-
-# App source code (kept local, ignored from GitHub sync)
-app/src/
