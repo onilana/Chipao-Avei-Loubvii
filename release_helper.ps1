@@ -91,28 +91,42 @@ if (Test-Path $aabPath) {
     Write-Host "  [OK] Built signed App Bundle (.aab) successfully! ($aabSizeMB MB)" -ForegroundColor Green
 }
 
-# 6. Commit and Push to GitHub
+# 6. Commit and Push to Private & Public Repositories
 Write-Host ""
-Write-Host "Pushing updates to GitHub..." -ForegroundColor Cyan
+Write-Host "Saving release commit..." -ForegroundColor Cyan
 git add -A
 git commit -m ("Release v" + $newVersionName)
-git push origin main
 
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "  [OK] Pushed code to GitHub origin main" -ForegroundColor Green
-} else {
-    Write-Host "  [ERROR] Failed to push code to GitHub origin main!" -ForegroundColor Red
-    Write-Host "  Please run 'git pull' and 'git push' manually to complete the sync." -ForegroundColor Yellow
-}
-
-# Optional: Push full code backup to Private repository if configured
+# 6a. Push full code to Private repository
 $remotes = (git remote) -split "`r?`n"
 if ($remotes -contains "private") {
-    Write-Host "Backing up full source to private repository..." -ForegroundColor Cyan
+    Write-Host "Backing up full release code to PRIVATE repository..." -ForegroundColor Cyan
     git push private source:main
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "  [OK] Pushed full code to private repository" -ForegroundColor Green
+        Write-Host "  [OK] Private repository updated!" -ForegroundColor Green
     }
+}
+
+# 6b. Safely push release metadata to Public repository (excluding app/src)
+Write-Host "Pushing release metadata to PUBLIC repository (excluding app/src)..." -ForegroundColor Cyan
+$tempIndex = [System.IO.Path]::GetTempFileName()
+try {
+    $env:GIT_INDEX_FILE = $tempIndex
+    git read-tree source
+    git rm --cached -r app/src 2>$null | Out-Null
+    $publicTree = (git write-tree).Trim()
+    $parentCommit = (git rev-parse refs/heads/main).Trim()
+    $newCommit = (git commit-tree $publicTree -p $parentCommit -m ("Release v" + $newVersionName)).Trim()
+    git update-ref refs/heads/main $newCommit
+    git push origin main
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "  [OK] Public repository updated with release metadata!" -ForegroundColor Green
+    } else {
+        Write-Host "  [ERROR] Failed to push to Public repo." -ForegroundColor Red
+    }
+} finally {
+    Remove-Item env:GIT_INDEX_FILE -ErrorAction SilentlyContinue
+    Remove-Item $tempIndex -ErrorAction SilentlyContinue
 }
 
 # 7. Open GitHub Release page and highlight artifacts in Explorer
