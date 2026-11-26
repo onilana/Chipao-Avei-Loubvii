@@ -10,7 +10,7 @@ This document outlines the exact, step-by-step procedure to release a new versio
 | :--- | :--- | :--- |
 | **1** | Bump version code & name | [`app/build.gradle.kts`](file:///c:/Users/MEC-Oni/Downloads/chipao-avei-loubvü/app/build.gradle.kts) |
 | **2** | Update version metadata | [`version.json`](file:///c:/Users/MEC-Oni/Downloads/chipao-avei-loubvü/version.json) |
-| **3** | Build signed release APK | `.\gradlew.bat :app:assembleRelease` |
+| **3** | Build signed release APK & AAB | `.\gradlew.bat :app:assembleRelease :app:bundleRelease` |
 | **4** | Commit & push to GitHub | `git add . && git commit -m "..." && git push origin main` |
 | **5** | Attach APK to GitHub Release | [`GitHub Releases`](https://github.com/onilana/Chipao-Avei-Loubvii/releases/new) |
 
@@ -58,18 +58,24 @@ Open [`version.json`](file:///c:/Users/MEC-Oni/Downloads/chipao-avei-loubvü/ver
 
 ---
 
-### Step 3: Build the Signed Release APK
+### Step 3: Build the Signed Release APK & App Bundle (.aab)
 
 Open PowerShell or Terminal in the project root and run:
 
 ```powershell
-.\gradlew.bat :app:assembleRelease
+# Build both signed APK and signed Android App Bundle (.aab)
+.\gradlew.bat :app:assembleRelease :app:bundleRelease
 ```
 
-Once the build finishes (`BUILD SUCCESSFUL`), the signed APK is located at:
-```
-app\build\outputs\apk\release\app-release.apk
-```
+Once the build finishes (`BUILD SUCCESSFUL`), the signed artifacts are located at:
+* **Signed APK** (for GitHub Release & In-App Direct Updater):
+  ```
+  app\build\outputs\apk\release\app-release.apk
+  ```
+* **Signed App Bundle (.aab)** (for Google Play Console / Store Upload):
+  ```
+  app\build\outputs\bundle\release\app-release.aab
+  ```
 
 ---
 

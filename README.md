@@ -88,9 +88,10 @@
      .\gradlew.bat :app:assembleDebug
      ```
 
-5. **Assemble Release APK**:
+5. **Assemble Release APK & App Bundle (.aab)**:
    ```bash
-   .\gradlew.bat :app:assembleRelease
+   # Build both signed APK and AAB
+   .\gradlew.bat :app:assembleRelease :app:bundleRelease
    ```
 
 ---

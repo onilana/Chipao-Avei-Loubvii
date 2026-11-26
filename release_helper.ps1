@@ -63,10 +63,10 @@ $versionJsonStr = $versionJsonObj | ConvertTo-Json -Depth 4
 Set-Content -Path "version.json" -Value $versionJsonStr -Encoding UTF8
 Write-Host "  [OK] Updated version.json" -ForegroundColor DarkGreen
 
-# 5. Build signed release APK
+# 5. Build signed release APK and App Bundle (.aab)
 Write-Host ""
-Write-Host "Building signed release APK..." -ForegroundColor Cyan
-& .\gradlew.bat :app:assembleRelease
+Write-Host "Building signed release APK & App Bundle (.aab)..." -ForegroundColor Cyan
+& .\gradlew.bat :app:assembleRelease :app:bundleRelease
 
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Build failed! Please check the errors above." -ForegroundColor Red
@@ -74,6 +74,8 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 $apkPath = "app\build\outputs\apk\release\app-release.apk"
+$aabPath = "app\build\outputs\bundle\release\app-release.aab"
+
 if (-not (Test-Path $apkPath)) {
     Write-Host "APK not found at $apkPath!" -ForegroundColor Red
     exit 1
@@ -82,6 +84,12 @@ if (-not (Test-Path $apkPath)) {
 $apkItem = Get-Item $apkPath
 $apkSizeMB = [math]::Round($apkItem.Length / 1MB, 2)
 Write-Host "  [OK] Built signed APK successfully! ($apkSizeMB MB)" -ForegroundColor Green
+
+if (Test-Path $aabPath) {
+    $aabItem = Get-Item $aabPath
+    $aabSizeMB = [math]::Round($aabItem.Length / 1MB, 2)
+    Write-Host "  [OK] Built signed App Bundle (.aab) successfully! ($aabSizeMB MB)" -ForegroundColor Green
+}
 
 # 6. Commit and Push to GitHub
 Write-Host ""
@@ -97,19 +105,25 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "  Please run 'git pull' and 'git push' manually to complete the sync." -ForegroundColor Yellow
 }
 
-# 7. Open GitHub Release page and highlight APK in Explorer
+# 7. Open GitHub Release page and highlight artifacts in Explorer
 Write-Host ""
 Write-Host "==================================================" -ForegroundColor Cyan
-Write-Host "  Final Step: Publish on GitHub!" -ForegroundColor Yellow
+Write-Host "  Final Step: Publish Release!" -ForegroundColor Yellow
 Write-Host "==================================================" -ForegroundColor Cyan
 Write-Host "1. Tag version: v$newVersionName"
 Write-Host "2. Release title: Chipao Avei Loubvu v$newVersionName"
-Write-Host "3. Drag and drop app-release.apk into the upload box"
-Write-Host "4. Click 'Publish release'"
+Write-Host "3. Upload artifacts:"
+Write-Host "   - app-release.apk  (GitHub Release / In-App Direct Updater)"
+Write-Host "   - app-release.aab  (Google Play Console / App Bundle)"
+Write-Host "4. Click 'Publish release' on GitHub"
 Write-Host "==================================================" -ForegroundColor Cyan
 
 # Open folder and browser
 Start-Process explorer.exe "/select,$apkPath"
+if (Test-Path $aabPath) {
+    $aabFolder = (Get-Item $aabPath).DirectoryName
+    Start-Process explorer.exe $aabFolder
+}
 Start-Process "https://github.com/onilana/Chipao-Avei-Loubvii/releases/new"
 
 Write-Host "Done!" -ForegroundColor Green
