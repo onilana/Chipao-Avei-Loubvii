@@ -5,7 +5,7 @@
 [![UI Toolkit](https://img.shields.io/badge/UI-Jetpack%20Compose%20%7C%20Material%203-4285F4.svg?logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose)
 [![Min SDK](https://img.shields.io/badge/Min%20SDK-24%20(Android%207.0)-informational.svg)](https://developer.android.com)
 [![Target SDK](https://img.shields.io/badge/Target%20SDK-35%20(Android%2015)-blue.svg)](https://developer.android.com)
-[![License](https://img.shields.io/badge/License-Proprietary%20%2F%20PNBA-lightgrey.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Proprietary%20%2F%20PNBA-lightgrey.svg)](#-license--attribution)
 [![Latest Release](https://img.shields.io/github/v/release/onilana/Chipao-Avei-Loubvii?color=success&logo=github)](https://github.com/onilana/Chipao-Avei-Loubvii/releases/latest)
 
 > The official digital hymnal companion for the **Poumai Naga Baptist Association (PNBA)**, designed for church worship services, choir rehearsals, family devotions, and personal Bible study.
@@ -27,7 +27,7 @@
 ### 📱 Responsive & Adaptive Design
 * **Portrait & Landscape Modes**: Specially tailored landscape view that automatically streamlines the header and navigation bar, freeing up screen real estate for choir stands and podium tablets.
 * **Adaptive Number Grid**: Fast, high-density 5-column (portrait) and 9-column (landscape) quick-jump keypad.
-* **Thematic Registry (1–30)**: Browse hymns organized into 30 biblical themes (Praise & Adoration, Worship, Faith, Assurance, Missions, and more).
+* **Topical Index (1–31)**: Browse hymns organized into all 31 canonical topics from the printed hymnal (Praise & Adoration, Worship, Faith & Trust, Dedication & Church Foundation Day, and more).
 
 ### 🛠️ Personalization & Reading Tools
 * **Reader Themes**: Choose from Light, Sepia/Parchment, and AMOLED Pure Dark mode.
@@ -56,81 +56,22 @@
 
 ---
 
-## 🚀 Building & Running Locally
+## 📲 Download & Install
 
-### Prerequisites
-* **Android Studio** (Koala / Ladybug or newer recommended)
-* **Android SDK**: `compileSdk 35`, `minSdk 24`
-* **JDK**: Version 17 or higher
+The latest signed Android APK is published on [GitHub Releases](https://github.com/onilana/Chipao-Avei-Loubvii/releases/latest):
 
-### Steps
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/onilana/Chipao-Avei-Loubvii.git
-   cd Chipao-Avei-Loubvii
-   ```
-
-2. **Open in Android Studio**:
-   * Open Android Studio → **Open** → Select the cloned directory.
-   * Allow Android Studio to fix any incompatibilities as it imports the project.
-
-3. **Configure Local Properties**:
-   Ensure `local.properties` exists in the root folder with your Android SDK path:
-   ```properties
-   sdk.dir=C\:\\Users\\<Username>\\AppData\\Local\\Android\\Sdk
-   ```
-
-4. **Build and Run**:
-   * Select an emulator or connected Android device.
-   * Press **Run (Shift + F10)**, or build via terminal:
-     ```bash
-     .\gradlew.bat :app:assembleDebug
-     ```
-
-5. **Assemble Release APK & App Bundle (.aab)**:
-   ```bash
-   # Build both signed APK and AAB
-   .\gradlew.bat :app:assembleRelease :app:bundleRelease
-   ```
-
----
-
-## 📦 How to Release an Update
-
-To publish a new version that triggers the automated in-app update for all users:
-
-```powershell
-# Run the interactive 1-click release script
-.\release.bat
-```
-
-For detailed manual instructions, see [`RELEASE_GUIDE.md`](RELEASE_GUIDE.md).
-
----
-
-## 📝 Original Setup & AI Studio Notes
+1. Open the [**Latest Release**](https://github.com/onilana/Chipao-Avei-Loubvii/releases/latest) page on your Android device.
+2. Download **`app-release.apk`** from the **Assets** section.
+3. Open the downloaded file and tap **Install** (or **Update** if upgrading from an earlier version).
 
 > [!NOTE]
-> The notes below are preserved from the original project setup:
+> Once installed, the app automatically checks [`version.json`](version.json) and notifies you whenever a newer version is available.
 
-This contains everything you need to run your app locally.
+---
 
-### Run Locally
+## 📁 Repository Structure
 
-**Prerequisites:** [Android Studio](https://developer.android.com/studio)
-
-1. Open Android Studio
-2. Select **Open** and choose the directory containing this project
-3. Allow Android Studio to fix any incompatibilities as it imports the project.
-4. Create a file named `.env` in the project directory and set `GEMINI_API_KEY` in that file to your Gemini API key (see `.env.example` for an example)
-5. Remove this line from the app's `build.gradle.kts` file: `signingConfig = signingConfigs.getByName("debugConfig")`
-6. Run the app on an emulator or physical device
-7. If you have already published your app in AI Studio, please [request upload key reset](https://support.google.com/googleplay/android-developer/answer/9842756#zippy=%2Crequest-an-upload-key-reset) in Google Play Console.
-
-```powershell
-.\gradlew.bat :app:assembleRelease
-```
+This public repository hosts official APK releases, [`version.json`](version.json) update metadata, and hymn builder utilities. The Android application source code (`app/src`), signing keys, and internal release scripts are maintained in a separate private repository.
 
 ---
 
